@@ -138,7 +138,7 @@ check_in_day, check_out_day, num_people) VALUES
 (9, 2, 9, '24-12-15', '24-12-16', 8), (10, 3, 10, '24-12-15', '24-12-18', 2);
 
 -- payment 결제
-INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VALUES
+INSERT INTO payment (reservation_id, total_price, payment_type) VALUES
 (1, 40000, '신용카드'),
 (2, 50000, '현금'),
 (3, 70000, '신용카드'),

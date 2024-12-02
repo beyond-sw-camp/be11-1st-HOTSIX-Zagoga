@@ -72,10 +72,6 @@ INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) V
 (9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
 (10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
 
--- reservation insert
-insert into reservation(user_id) 
-values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
-
 -- accommodation_facility 숙박편의시설
 INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) 
 VALUES
@@ -101,7 +97,6 @@ insert into room(id, accommodation_id, type, people_max, off_peak_season_price, 
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,10,'패밀리', 4, 120000,2400000,0,1);
 
 -- favorite_list 즐겨찾기
 INSERT INTO favorite_list (user_id, accommodation_id) VALUES
@@ -176,6 +171,3 @@ BEGIN
 END$$
 DELIMITER ;
 CALL insert_accommodations();
-
-
-

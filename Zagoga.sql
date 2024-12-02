@@ -3,10 +3,11 @@
 	`name`	varchar(255)	NULL,
 	`personal_id`	varchar(255)	NOT NULL,
 	`phone_number`	varchar(255)	NOT NULL,
-	`sex`	enum	NULL	DEFAULT 남/여,
-	`level`	enum	NULL	DEFAULT Bronze	COMMENT '브실골프다Vip',
-	`created_time`	datetime	NULL	DEFAULT current_timestamp,
-	`delete_user`	boolen	NULL	DEFAULT default False
+	`email`	varchar(255)	NULL,
+	`sex`	enum	NULL	DEFAULT '남', '여',
+	`level`	enum	NULL	DEFAULT 'Bronze', 'Silver', 'Gold', 'Platinum', 'Vip',
+	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
+	`delete_user`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `accommodation` (
@@ -20,8 +21,9 @@ CREATE TABLE `accommodation` (
 	`check_in_time`	varchar(255)	NULL,
 	`check_out_time`	varchar(255)	NULL,
 	`rent_time`	varchar(255)	NULL,
-	`business_num`	int	NOT NULL,
-	`delete_accommodation`	boolen	NULL	DEFAULT false
+	`business_num`	varchar(255)	NOT NULL,
+	`update_time`	datetime	NULL	DEFAULT current_timestamp(),
+	`delete_accommodation`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `reservation` (
@@ -35,8 +37,8 @@ CREATE TABLE `owner` (
 	`personal_id`	varchar(255)	NOT NULL,
 	`phone_number`	varchar(255)	NOT NULL,
 	`account_number`	varchar(255)	NOT NULL,
-	`created_time`	datetime	NULL	DEFAULT current_timestamp,
-	`delete_owner`	boolen	NULL	DEFAULT default False
+	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
+	`delete_owner`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `room` (
@@ -54,42 +56,42 @@ CREATE TABLE `coupon_list` (
 	`id`	bigint	NOT NULL	DEFAULT auto_increment,
 	`user_id`	bigint	NOT NULL,
 	`coupon_type_id`	bigint	NOT NULL,
-	`created_time`	datetime	NULL	DEFAULT current_timestamp,
+	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
 	`expire_time`	datetime	NULL,
-	`usable`	boolen	NULL	DEFAULT default : True	COMMENT 'T/F'
+	`usable`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `accommodation_facility` (
 	`id`	bigint	NOT NULL	DEFAULT auto_increment,
 	`accommodation_id`	bigint	NOT NULL,
-	`able_bbq`	boolen	NULL	DEFAULT false	COMMENT 'default',
-	`able_parking`	boolen	NULL	DEFAULT false,
-	`able_sports`	boolen	NULL	DEFAULT false,
-	`able_sauna`	boolen	NULL	DEFAULT false,
-	`able_front`	boolen	NULL	DEFAULT false,
-	`able_breakfast`	boolen	NULL	DEFAULT false,
-	`able_swim`	boolen	NULL	DEFAULT false
+	`able_bbq`	boolean	NULL	DEFAULT 0,
+	`able_parking`	boolean	NULL	DEFAULT 0,
+	`able_sports`	boolean	NULL	DEFAULT 0,
+	`able_sauna`	boolean	NULL	DEFAULT 0,
+	`able_front`	boolean	NULL	DEFAULT 0,
+	`able_breakfast`	boolean	NULL	DEFAULT 0,
+	`able_swim`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `room_facility` (
 	`id`	bigint	NOT NULL	DEFAULT auto_increment,
 	`room_id`	bigint	NOT NULL,
-	`bed_num`	int	NULL,
-	`bed_type`	varchar(255)	NULL	COMMENT '침대사이즈',
-	`has_bath`	boolen	NULL,
-	`has_air_condition`	boolen	NULL,
-	`has_tv`	boolen	NULL,
-	`has_internet`	boolen	NULL,
-	`has_ott`	boolen	NULL,
-	`has_amenity`	boolen	NULL,
-	`has_animal`	boolen	NULL
+	`bed_num`	int	NULL	DEFAULT 1,
+	`bed_type`	enum	NULL	DEFAULT 'Single', 'Double', 'Queen'	COMMENT '침대사이즈',
+	`has_bath`	boolean	NULL	DEFAULT 0,
+	`has_air_condition`	boolean	NULL	DEFAULT 0,
+	`has_tv`	boolean	NULL	DEFAULT 0,
+	`has_internet`	boolean	NULL	DEFAULT 0,
+	`has_ott`	boolean	NULL	DEFAULT 0,
+	`has_amenity`	boolean	NULL	DEFAULT 0,
+	`has_animal`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `admin` (
 	`id`	bigint	NOT NULL	DEFAULT auto_increment,
 	`name`	varchar(255)	NULL,
-	`type`	enum	NULL	DEFAULT server_admin / customer_service	COMMENT '서버관리자/상담원',
-	`created_time`	datetime	NULL
+	`type`	enum	NULL	DEFAULT 'server_admin', ' customer_service'	COMMENT '서버관리자/상담원',
+	`created_time`	datetime	NULL	DEFAULT current_timestamp()
 );
 
 CREATE TABLE `cs_chat` (
@@ -98,8 +100,8 @@ CREATE TABLE `cs_chat` (
 	`user_id`	bigint	NULL,
 	`admin_id`	bigint	NULL,
 	`contents`	varchar(3000)	NULL,
-	`created_time`	datetime	NULL	DEFAULT current_timestamp,
-	`sender`	enum	NULL	DEFAULT user/owner/admin
+	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
+	`sender`	enum	NULL	DEFAULT 'user', 'owner', 'admin'
 );
 
 CREATE TABLE `payment` (
@@ -121,7 +123,7 @@ CREATE TABLE `coupon` (
 	`name`	varchar(255)	NOT NULL,
 	`discount`	varchar(255)	NOT NULL,
 	`describe`	varchar(255)	NULL,
-	`update_time`	datetime	NULL	DEFAULT current_timestamp
+	`update_time`	datetime	NULL	DEFAULT current_timestamp()
 );
 
 CREATE TABLE `detailed_reservation` (
@@ -132,7 +134,7 @@ CREATE TABLE `detailed_reservation` (
 	`check_in_day`	date	NOT NULL,
 	`check_out_day`	date	NOT NULL,
 	`num_people`	int	NOT NULL,
-	`created_time`	datetime	NULL	DEFAULT current_timestamp
+	`created_time`	datetime	NULL	DEFAULT current_timestamp()
 );
 
 CREATE TABLE `review` (
@@ -141,8 +143,8 @@ CREATE TABLE `review` (
 	`payment_id`	bigint	NOT NULL,
 	`title`	varchar(255)	NULL,
 	`content`	varchar(10000)	NULL,
-	`star`	varchar(255)	NULL	COMMENT '1-5',
-	`photo`	datetime	NULL	DEFAULT current_timestamp	COMMENT '방사진 경로'
+	`star`	int	NULL	COMMENT '1-5',
+	`photo`	datetime	NULL	DEFAULT current_timestamp()	COMMENT '방사진 경로'
 );
 
 ALTER TABLE `user` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
@@ -348,4 +350,3 @@ ALTER TABLE `review` ADD CONSTRAINT `FK_payment_TO_review_1` FOREIGN KEY (
 REFERENCES `payment` (
 	`id`
 );
-

@@ -133,6 +133,29 @@ INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_conditi
 insert into reservation(user_id) 
 values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
 
+-- payment 결제
+INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VALUES
+(1, 40000, '신용카드'),
+(2, 50000, '현금'),
+(3, 70000, '신용카드'),
+(4, 66000, '신용카드'),
+(5, 86000, '현금'),
+(6, 44000, '신용카드'),
+(7, 90000, '현금'),
+(8, 67000, '신용카드'),
+(9, 55000, '신용카드'),
+(10, 87000, '현금')),
+(11, 49000, '신용카드'),
+(12, 60000, '현금'),
+(13, 70000, '신용카드'),
+(14, 87000, '신용카드'),
+(15, 45000, '현금'),
+(16, 65000, '신용카드'),
+(17, 155000, '현금'),
+(18, 75000, '신용카드'),
+(19, 75000, '신용카드'),
+(20, 85000, '현금');
+
 -- admin insert 프로시저
 DELIMITER $$
 CREATE PROCEDURE insert_owners()

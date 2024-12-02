@@ -72,6 +72,10 @@ INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) V
 (9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
 (10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
 
+-- reservation insert
+insert into reservation(user_id) 
+values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
+
 -- accommodation_facility 숙박편의시설
 INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) 
 VALUES

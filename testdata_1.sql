@@ -87,16 +87,17 @@ VALUES
 (10, 0, 0, 1, 1, 0, 0, 1);
 
 -- insert room
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(1,1,'트윈', 2, 50000,100000,0,5);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(2,2,'패밀리', 4, 80000,1500000,40000,3);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(3,2,'트윈', 2, 40000,100000,40000,10);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(4,3,'패밀리', 4, 100000,180000,0,4);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(5,4,'트윈', 2, 60000,100000,0,5);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(6,5,'트윈', 2, 80000,100000,30000,8);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(7,6,'트윈', 2, 45000,100000,50000,6);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) 
+values(1,1,'트윈', 2, 50000,100000,0,5),
+(2,2,'패밀리', 4, 80000,1500000,40000,3),
+(3,2,'트윈', 2, 40000,100000,40000,10),
+(4,3,'패밀리', 4, 100000,180000,0,4),
+(5,4,'트윈', 2, 60000,100000,0,5),
+(6,5,'트윈', 2, 80000,100000,30000,8),
+(7,6,'트윈', 2, 45000,100000,50000,6),
+(8,7,'트윈', 2, 100000,200000,0,8),
+(9,8,'패밀리', 4, 150000,300000,0,2),
+(10,9,'패밀리', 4, 100000,2000000,0,1);
 
 -- favorite_list 즐겨찾기
 INSERT INTO favorite_list (user_id, accommodation_id) VALUES

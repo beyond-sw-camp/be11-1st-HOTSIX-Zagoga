@@ -137,7 +137,7 @@ DELIMITER ;
 
 CALL insert_accommodations();
 
--- accommodation_facility 숙박편의시설
+-- accommodation_facility 숙박 편의시설
 INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
 (1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
 (2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
@@ -177,3 +177,15 @@ INSERT INTO favorite_list (user_id, accommodation_id) VALUES
 (3, 9),
 (2, 10);
 
+-- room_facility 객실 편의시설
+INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_condition, has_tv, has_internet, has_ott, has_amenity, has_animal) VALUES
+(1, 1, 'Single', 1, 1, 1, 1, 0, 1, 0),
+(2, 2, 'Double', 0, 1, 0, 1, 1, 0, 1),
+(3, 1, 'Queen', 1, 0, 1, 0, 0, 1, 0),
+(4, 2, 'Single', 1, 1, 1, 1, 1, 1, 1),
+(5, 3, 'Double', 0, 0, 0, 1, 0, 0, 0),
+(6, 1, 'Queen', 1, 1, 1, 0, 1, 1, 1),
+(7, 2, 'Single', 0, 1, 0, 1, 0, 1, 0),
+(8, 3, 'Double', 1, 0, 1, 1, 1, 0, 1),
+(9, 1, 'Queen', 0, 1, 1, 0, 0, 1, 0),
+(10, 2, 'Single', 1, 1, 0, 1, 1, 1, 1);

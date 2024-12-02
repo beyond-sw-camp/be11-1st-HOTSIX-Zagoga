@@ -84,7 +84,7 @@ BEGIN
          ROUND(126 + (RAND() * 5), 6), 
          '15:00', 
          '11:00', 
-         '1박', 
+         '4시간', 
          CONCAT(FLOOR(100 + RAND() * 900), '-', FLOOR(100 + RAND() * 900), '-', FLOOR(1000 + RAND() * 9000)), 
          NOW(), 
          0);

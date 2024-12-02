@@ -12,16 +12,16 @@ INSERT INTO user (name, personal_id, phone_number, email, sex, level) VALUES
 ('한지민', '012345-0123456', '010-0123-4567', 'han@example.com', '여', 'Platinum');
 
 -- owner insert
-    insert into owner(id, name, personal_id, phone_number, account_number) values(1,'김봉삼','760507-226981','010-8765-0009','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(2,'황덕운','980103-229321','010-7775-1239','232323-733389');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(3,'이봉출','660108-126999','010-4443-6729','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(4,'김문덕','691207-226986','010-1234-6649','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(5,'최봉이','501098-213381','010-5556-8869','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(6,'이향림','700323-136923','010-6574-0329','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(7,'신명춘','550631-223481','010-9993-3456','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(8,'서명덕','861101-134687','010-4567-4511','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(9,'강신구','950818-424989','010-1918-5594','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(10,'지석삼','630404-226981','010-7766-1239','134501-329456');
+    insert into owner(id, name, personal_id, phone_number, account_number) values(1,'김봉삼','760507-226981','010-8765-0009','134501-329456'),
+    (2,'황덕운','980103-229321','010-7775-1239','232323-733389'),
+    (3,'이봉출','660108-126999','010-4443-6729','134501-329456'),
+    (4,'김문덕','691207-226986','010-1234-6649','134501-329456'),
+    (5,'최봉이','501098-213381','010-5556-8869','134501-329456'),
+    (6,'이향림','700323-136923','010-6574-0329','134501-329456'),
+    (7,'신명춘','550631-223481','010-9993-3456','134501-329456'),
+    (8,'서명덕','861101-134687','010-4567-4511','134501-329456'),
+    (9,'강신구','950818-424989','010-1918-5594','134501-329456'),
+    (10,'지석삼','630404-226981','010-7766-1239','134501-329456');
 
 -- admin insert
 alter table admin modify column type enum('server_admin','custom_service');
@@ -72,10 +72,6 @@ INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) V
 (9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
 (10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
 
--- reservation insert
-insert into reservation(user_id) 
-values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
-
 -- accommodation_facility 숙박편의시설
 INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) 
 VALUES
@@ -91,6 +87,7 @@ VALUES
 (10, 0, 0, 1, 1, 0, 0, 1);
 
 -- insert room
+
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(1,1,'트윈', 2, 50000,100000,0,5);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(2,2,'패밀리', 4, 80000,1500000,40000,3);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(3,2,'트윈', 2, 40000,100000,40000,10);
@@ -101,6 +98,18 @@ insert into room(id, accommodation_id, type, people_max, off_peak_season_price, 
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
+
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) 
+values(1,1,'트윈', 2, 50000,100000,0,5),
+(2,2,'패밀리', 4, 80000,1500000,40000,3),
+(3,2,'트윈', 2, 40000,100000,40000,10),
+(4,3,'패밀리', 4, 100000,180000,0,4),
+(5,4,'트윈', 2, 60000,100000,0,5),
+(6,5,'트윈', 2, 80000,100000,30000,8),
+(7,6,'트윈', 2, 45000,100000,50000,6),
+(8,7,'트윈', 2, 100000,200000,0,8),
+(9,8,'패밀리', 4, 150000,300000,0,2),
+(10,9,'패밀리', 4, 100000,2000000,0,1);
 
 -- favorite_list 즐겨찾기
 INSERT INTO favorite_list (user_id, accommodation_id) VALUES
@@ -132,7 +141,44 @@ INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_conditi
 insert into reservation(user_id) 
 values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
 
--- admin insert 프로시저
+-- detailed_reservation insert
+INSERT INTO detailed_reservation(reservation_id, room_id, coupon_id, 
+check_in_day, check_out_day, num_people) VALUES
+(1, 1, 1, '24-12-04', '24-12-05', 2), (2, 2, 2, '24-12-05', '24-12-07', 3), 
+(3, 3, 3, '24-12-06', '24-12-09', 5), (4, 4, 4, '24-12-07', '24-12-08', 4), 
+(5, 5, 5, '24-12-08', '24-12-10', 2), (6, 6, 6, '24-12-09', '24-12-16', 6), 
+(7, 7, 7, '24-12-10', '24-12-12', 2), (8, 8, 8, '24-12-11', '24-12-18', 4), 
+(9, 2, 9, '24-12-15', '24-12-16', 8), (10, 3, 10, '24-12-15', '24-12-18', 2);
+
+-- payment 결제
+INSERT INTO payment (reservation_id, total_price, payment_type) VALUES
+(1, 40000, '신용카드'),
+(2, 50000, '현금'),
+(3, 70000, '신용카드'),
+(4, 66000, '신용카드'),
+(5, 86000, '현금'),
+(6, 44000, '신용카드'),
+(7, 90000, '현금'),
+(8, 67000, '신용카드'),
+(9, 55000, '신용카드'),
+(10, 87000, '현금');
+
+-- review insert
+INSERT INTO review(accommodation_id, payment_id, title, content, star) 
+VALUES
+(1, 3, '정말 최고에요', '쩔때료 여뀌로 오찌 마쎼여!!', 5),
+(2, 7, '최악의 경험', '다시는 오고 싶지 않아요.', 1),
+(3, 1, '매우 만족', '깨끗하고 조용했어요.', 4),
+(4, 6, '불편했어요', '시설이 별로였어요.', 2),
+(5, 5, '완벽한 휴가', '다시 가고 싶은 곳입니다!', 5),
+(6, 8, '별로였습니다', '직원 태도가 너무 불친절했어요.', 1),
+(7, 2, '가성비 최고', '가격 대비 아주 훌륭했어요.', 4),
+(8, 6, '좀 아쉬워요', '방음이 안 돼서 시끄러웠어요.', 2),
+(9, 4, '추천합니다!', '정말 즐거운 시간이었어요.', 5),
+(10, 9, '그저 그래요', '기대했던 만큼은 아니었어요.', 2);
+
+
+-- owners insert 프로시저
 DELIMITER $$
 CREATE PROCEDURE insert_owners()
 BEGIN
@@ -176,5 +222,76 @@ END$$
 DELIMITER ;
 CALL insert_accommodations();
 
+-- 채팅_유저_오너
+DELIMITER $$
 
+CREATE PROCEDURE 채팅_유저_오너 (
+	IN p_owner_id BIGINT,
+	IN p_user_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('user', 'owner')
+)
+BEGIN
+	INSERT INTO cs_chat (owner_id, user_id, contents, sender)
+	VALUES (p_owner_id, p_user_id, p_contents, p_sender);
+END$$
 
+DELIMITER ;
+CALL 채팅_유저_오너(1, 2, '안녕하세요, 문의드립니다.', 'user');
+
+-- 채팅_유저_상담원
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_유저_상담원 (
+	IN p_user_id BIGINT,
+	IN p_admin_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('user', 'admin')
+)
+BEGIN
+	INSERT INTO cs_chat (user_id, admin_id, contents, sender)
+	VALUES (p_user_id, p_admin_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+CALL 채팅_유저_상담원(2, 3, '상품 문의가 있어요.', 'user');
+
+-- 채팅_오너_상담원
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_오너_상담원 (
+	IN p_owner_id BIGINT,
+	IN p_admin_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('owner', 'admin')
+)
+BEGIN
+	INSERT INTO cs_chat (owner_id, admin_id, contents, sender)
+	VALUES (p_owner_id, p_admin_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+CALL 채팅_오너_상담원(1, 3, '고객 요청 처리 부탁드립니다.', 'owner');
+
+-- 채팅_내역_조회
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_내역_조회 (
+	IN p_sender ENUM('user', 'owner', 'admin'), 
+	IN p_sender_id BIGINT
+)
+BEGIN
+	IF p_sender = 'user' THEN
+		SELECT * FROM cs_chat
+		WHERE user_id = p_sender_id AND sender = 'user';
+	ELSEIF p_sender = 'owner' THEN
+		SELECT * FROM cs_chat
+		WHERE owner_id = p_sender_id AND sender = 'owner';
+	ELSEIF p_sender = 'admin' THEN
+		SELECT * FROM cs_chat
+		WHERE admin_id = p_sender_id AND sender = 'admin';
+	END IF;
+END$$
+
+DELIMITER ;
+CALL 채팅_내역_조회('user', 2);

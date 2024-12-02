@@ -1,21 +1,21 @@
 ﻿CREATE TABLE `user` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`name`	varchar(255)	NULL,
 	`personal_id`	varchar(255)	NOT NULL,
 	`phone_number`	varchar(255)	NOT NULL,
 	`email`	varchar(255)	NULL,
-	`sex`	enum	NULL	DEFAULT '남', '여',
-	`level`	enum	NULL	DEFAULT 'Bronze', 'Silver', 'Gold', 'Platinum', 'Vip',
+	`sex`	enum('남', '여')	NULL	
+	`level`	enum('Bronze', 'Silver','Gold','Platinum','Vip')	NULL	DEFAULT 'Bronze',
 	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
 	`delete_user`	boolean	NULL	DEFAULT 0
 );
 
 CREATE TABLE `accommodation` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`owner_id`	bigint	NOT NULL,
 	`name`	varchar(255)	NOT NULL,
-	`type`	enum	NOT NULL	COMMENT 'hotel/motel/pension',
-	`address`	varchar(255)	NOT NULL	COMMENT '도로명주소',
+	`type`	enum('hotel','motel','pension')	NOT NULL,
+	`address`	varchar(255)	NOT NULL,
 	`latitue`	decimal	NOT NULL,
 	`hardness`	decimal	NOT NULL,
 	`check_in_time`	varchar(255)	NULL,
@@ -27,12 +27,12 @@ CREATE TABLE `accommodation` (
 );
 
 CREATE TABLE `reservation` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`user_id`	bigint	NOT NULL
 );
 
 CREATE TABLE `owner` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`name`	varchar(255)	NULL,
 	`personal_id`	varchar(255)	NOT NULL,
 	`phone_number`	varchar(255)	NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `owner` (
 );
 
 CREATE TABLE `room` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`accommodation_id`	bigint	NOT NULL,
 	`type`	varchar(255)	NOT NULL,
 	`people_max`	int	NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `room` (
 );
 
 CREATE TABLE `coupon_list` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`user_id`	bigint	NOT NULL,
 	`coupon_type_id`	bigint	NOT NULL,
 	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
@@ -62,7 +62,7 @@ CREATE TABLE `coupon_list` (
 );
 
 CREATE TABLE `accommodation_facility` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`accommodation_id`	bigint	NOT NULL,
 	`able_bbq`	boolean	NULL	DEFAULT 0,
 	`able_parking`	boolean	NULL	DEFAULT 0,
@@ -74,10 +74,10 @@ CREATE TABLE `accommodation_facility` (
 );
 
 CREATE TABLE `room_facility` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`room_id`	bigint	NOT NULL,
 	`bed_num`	int	NULL	DEFAULT 1,
-	`bed_type`	enum	NULL	DEFAULT 'Single', 'Double', 'Queen'	COMMENT '침대사이즈',
+	`bed_type`	enum('Single','Double','Queen')	NULL	DEFAULT 'Single', 'Double', 'Queen',
 	`has_bath`	boolean	NULL	DEFAULT 0,
 	`has_air_condition`	boolean	NULL	DEFAULT 0,
 	`has_tv`	boolean	NULL	DEFAULT 0,
@@ -88,24 +88,24 @@ CREATE TABLE `room_facility` (
 );
 
 CREATE TABLE `admin` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`name`	varchar(255)	NULL,
-	`type`	enum	NULL	DEFAULT 'server_admin', ' customer_service'	COMMENT '서버관리자/상담원',
+	`type`	enum('server_admin','customer_service','user')	NULL,
 	`created_time`	datetime	NULL	DEFAULT current_timestamp()
 );
 
 CREATE TABLE `cs_chat` (
-	`Key`	bigint	NOT NULL	DEFAULT auto_increment,
+	`Key`	bigint	NOT NULL auto_increment,
 	`owner_id`	bigint	NULL,
 	`user_id`	bigint	NULL,
 	`admin_id`	bigint	NULL,
 	`contents`	varchar(3000)	NULL,
 	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
-	`sender`	enum	NULL	DEFAULT 'user', 'owner', 'admin'
+	`sender`	enum('user','owner', 'admin')	NULL
 );
 
 CREATE TABLE `payment` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`reservation_id`	bigint	NOT NULL,
 	`total_price`	int	NOT NULL,
 	`payment_type`	varchar(255)	NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE `favorite_list` (
 );
 
 CREATE TABLE `coupon` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`name`	varchar(255)	NOT NULL,
 	`discount`	varchar(255)	NOT NULL,
 	`describe`	varchar(255)	NULL,
@@ -127,7 +127,7 @@ CREATE TABLE `coupon` (
 );
 
 CREATE TABLE `detailed_reservation` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`reservation_id`	bigint	NOT NULL,
 	`room_id`	bigint	NOT NULL,
 	`coupon_id`	bigint	NOT NULL,
@@ -138,13 +138,13 @@ CREATE TABLE `detailed_reservation` (
 );
 
 CREATE TABLE `review` (
-	`id`	bigint	NOT NULL	DEFAULT auto_increment,
+	`id`	bigint	NOT NULL auto_increment,
 	`accommodation_id`	bigint	NOT NULL,
 	`payment_id`	bigint	NOT NULL,
 	`title`	varchar(255)	NULL,
 	`content`	varchar(10000)	NULL,
-	`star`	int	NULL	COMMENT '1-5',
-	`photo`	datetime	NULL	DEFAULT current_timestamp()	COMMENT '방사진 경로'
+	`star`	int	NULL,
+	`photo`	datetime	NULL	DEFAULT current_timestamp()
 );
 
 ALTER TABLE `user` ADD CONSTRAINT `PK_USER` PRIMARY KEY (

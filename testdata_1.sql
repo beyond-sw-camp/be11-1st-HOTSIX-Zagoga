@@ -96,6 +96,16 @@ DELIMITER ;
 
 CALL insert_accommodations();
 
-
-
+-- accommodation_facility 숙박편의시설
+INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
+(1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
+(3, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
+(4, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE),
+(6, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE),
+(7, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE),
+(8, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
+(9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+(10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
 

@@ -24,7 +24,7 @@ insert into owner(id, name, personal_id, phone_id, phone_number, account_number)
 insert into owner(id, name, personal_id, phone_id, phone_number, account_number) values(10,'지석삼','630404-226981','010-7766-1239','134501-329456');
 
 -- admin insert
-alter table admin modify column type enum('sever_admin','custom_service');
+alter table admin modify column type enum('server_admin','custom_service');
 insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('서버 관리자2','server_admin'),
 ('서버 관리자3','server_admin'),

@@ -101,7 +101,6 @@ insert into room(id, accommodation_id, type, people_max, off_peak_season_price, 
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,10,'패밀리', 4, 120000,2400000,0,1);
 
 -- favorite_list 즐겨찾기
 INSERT INTO favorite_list (user_id, accommodation_id) VALUES

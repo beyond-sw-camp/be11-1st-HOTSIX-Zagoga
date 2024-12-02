@@ -23,7 +23,7 @@ CREATE TABLE owner (
 CREATE TABLE admin (
 	id bigint PRIMARY KEY NOT NULL auto_increment,
 	name varchar(255) NULL,
-	type enum('server_admin','customer_service','user') NULL,
+	type enum('server_admin','customer_service') NULL,
 	created_time datetime NULL DEFAULT current_timestamp()
 );
 

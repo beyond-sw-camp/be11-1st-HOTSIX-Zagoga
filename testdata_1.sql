@@ -28,7 +28,7 @@ alter table admin modify column type enum('server_admin','custom_service');
 insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('서버 관리자2','server_admin'),
 ('서버 관리자3','server_admin'),
-('상담원 John','custom_service'),
+('상담원 John','custom_service'), 
 ('상담원 Harry','custom_service'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
@@ -96,6 +96,18 @@ DELIMITER ;
 
 CALL insert_owners();
 
+-- accomodation insert
+insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
+values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
+(2, "이", "motel", "보라매로2", 2, 3, "오후2시", "오전11시", "4시간", "2345"),
+(3, "삼", "pension", "보라매로3", 3, 4, "오후4시", "오전11시", "6시간", "3456"),
+(4, "사", "hotel", "보라매로4", 4, 5, "오후5시", "오전11시", "5시간", "4567"),
+(5, "오", "motel", "보라매로5", 5, 6, "오후3시", "오전11시", "3시간", "5678"),
+(6, "육", "motel", "보라매로6", 6, 7, "오후3시", "오전11시", "4시간", "6789"),
+(7, "칠", "hotel", "보라매로7", 7, 8, "오후4시", "오전11시", "3시간", "7890"),
+(8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
+(9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
+(10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
 
 -- accomodation insert 프로시저
 DELIMITER $$
@@ -113,7 +125,7 @@ BEGIN
          ROUND(126 + (RAND() * 5), 6), 
          '15:00', 
          '11:00', 
-         '1박', 
+         '4시간', 
          CONCAT(FLOOR(100 + RAND() * 900), '-', FLOOR(100 + RAND() * 900), '-', FLOOR(1000 + RAND() * 9000)), 
          NOW(), 
          0);
@@ -125,6 +137,19 @@ DELIMITER ;
 
 CALL insert_accommodations();
 
+-- accommodation_facility 숙박편의시설
+INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
+(1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
+(3, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
+(4, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE),
+(6, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE),
+(7, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE),
+(8, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
+(9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+(10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
 
 
-
+-- coupon insert
+insert into 

@@ -22,6 +22,7 @@ insert into owner(id, name, personal_id, phone_id, phone_number, account_number)
 insert into owner(id, name, personal_id, phone_id, phone_number, account_number) values(8,'서명덕','861101-134687','010-4567-4511','134501-329456');
 insert into owner(id, name, personal_id, phone_id, phone_number, account_number) values(9,'강신구','950818-424989','010-1918-5594','134501-329456');
 insert into owner(id, name, personal_id, phone_id, phone_number, account_number) values(10,'지석삼','630404-226981','010-7766-1239','134501-329456');
+
 -- admin insert
 alter table admin modify column type enum('sever_admin','custom_service');
 insert into admin(name, type) values('서버 관리자1','server_admin'),

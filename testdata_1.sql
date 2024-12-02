@@ -261,3 +261,26 @@ END$$
 
 DELIMITER ;
 CALL 채팅_오너_상담원(1, 3, '고객 요청 처리 부탁드립니다.', 'owner');
+
+-- 채팅_내역_조회
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_내역_조회 (
+	IN p_sender ENUM('user', 'owner', 'admin'), 
+	IN p_sender_id BIGINT
+)
+BEGIN
+	IF p_sender = 'user' THEN
+		SELECT * FROM cs_chat
+		WHERE user_id = p_sender_id AND sender = 'user';
+	ELSEIF p_sender = 'owner' THEN
+		SELECT * FROM cs_chat
+		WHERE owner_id = p_sender_id AND sender = 'owner';
+	ELSEIF p_sender = 'admin' THEN
+		SELECT * FROM cs_chat
+		WHERE admin_id = p_sender_id AND sender = 'admin';
+	END IF;
+END$$
+
+DELIMITER ;
+CALL 채팅_내역_조회('user', 2);

@@ -7,7 +7,7 @@
 	sex enum('남', '여') NULL,	
 	level enum('Bronze', 'Silver','Gold','Platinum','Vip') NULL DEFAULT 'Bronze',
 	created_time datetime NULL DEFAULT current_timestamp(),
-	delete_user boolean NULL DEFAULT 0
+	delete_user tinyint NULL DEFAULT 0
 );
 
 CREATE TABLE owner (
@@ -17,7 +17,7 @@ CREATE TABLE owner (
 	phone_number varchar(255) NOT NULL,
 	account_number varchar(255) NOT NULL,
 	created_time datetime NULL DEFAULT current_timestamp(),
-	delete_owner boolean NULL DEFAULT 0
+	delete_owner tinyint NULL DEFAULT 0
 );
 
 CREATE TABLE admin (
@@ -62,7 +62,7 @@ CREATE TABLE accommodation (
 	rent_time varchar(255) NULL,
 	business_num varchar(255) NOT NULL,
 	update_time datetime NULL DEFAULT current_timestamp(),
-	delete_accommodation boolean NULL DEFAULT 0,
+	delete_accommodation tinyint NULL DEFAULT 0,
 
 	FOREIGN KEY(owner_id) REFERENCES owner(id)
 );
@@ -85,13 +85,13 @@ CREATE TABLE room_facility (
 	room_id bigint NOT NULL,
 	bed_num int NULL DEFAULT 1,
 	bed_type enum('Single','Double','Queen') NULL DEFAULT 'Single',
-	has_bath boolean NULL DEFAULT 0,
-	has_air_condition boolean	NULL DEFAULT 0,
-	has_tv boolean NULL DEFAULT 0,
-	has_internet boolean NULL DEFAULT 0,
-	has_ott boolean NULL DEFAULT 0,
-	has_amenity boolean NULL DEFAULT 0,
-	has_animal boolean NULL DEFAULT 0,
+	has_bath tinyint NULL DEFAULT 0,
+	has_air_condition tinyint	NULL DEFAULT 0,
+	has_tv tinyint NULL DEFAULT 0,
+	has_internet tinyint NULL DEFAULT 0,
+	has_ott tinyint NULL DEFAULT 0,
+	has_amenity tinyint NULL DEFAULT 0,
+	has_animal tinyint NULL DEFAULT 0,
 
 	FOREIGN KEY(room_id) REFERENCES room(id)
 );
@@ -110,7 +110,7 @@ CREATE TABLE coupon_list (
 	coupon_id bigint NOT NULL,
 	created_time datetime NULL DEFAULT current_timestamp(),
 	expire_time datetime NULL,
-	usable boolean NULL DEFAULT 0,
+	usable tinyint NULL DEFAULT 0,
 
 	FOREIGN KEY(user_id) REFERENCES user(id),
 	FOREIGN KEY(coupon_id) REFERENCES coupon(id)
@@ -119,13 +119,13 @@ CREATE TABLE coupon_list (
 CREATE TABLE accommodation_facility (
 	id bigint PRIMARY KEY NOT NULL auto_increment,
 	accommodation_id bigint NOT NULL,
-	able_bbq boolean NULL DEFAULT 0,
-	able_parking boolean NULL DEFAULT 0,
-	able_sports boolean NULL DEFAULT 0,
-	able_sauna boolean NULL DEFAULT 0,
-	able_front boolean NULL DEFAULT 0,
-	able_breakfast boolean NULL DEFAULT 0,
-	able_swim boolean	NULL DEFAULT 0,
+	able_bbq tinyint NULL DEFAULT 0,
+	able_parking tinyint NULL DEFAULT 0,
+	able_sports tinyint NULL DEFAULT 0,
+	able_sauna tinyint NULL DEFAULT 0,
+	able_front tinyint NULL DEFAULT 0,
+	able_breakfast tinyint NULL DEFAULT 0,
+	able_swim tinyint	NULL DEFAULT 0,
 
 	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id)
 );

@@ -4,7 +4,7 @@
 	`personal_id`	varchar(255)	NOT NULL,
 	`phone_number`	varchar(255)	NOT NULL,
 	`email`	varchar(255)	NULL,
-	`sex`	enum('남', '여')	NULL	
+	`sex`	enum('남', '여')	NULL,	
 	`level`	enum('Bronze', 'Silver','Gold','Platinum','Vip')	NULL	DEFAULT 'Bronze',
 	`created_time`	datetime	NULL	DEFAULT current_timestamp(),
 	`delete_user`	boolean	NULL	DEFAULT 0

@@ -15,8 +15,10 @@ INSERT INTO user (name, personal_id, phone_number, email, sex, level, created_ti
 
 -- admin insert
 alter table admin modify column type enum('sever_admin','custom_service');
-insert into admin(name, type) values('서버 관리자1','server_admin');
-insert into admin(name, type) values('서버 관리자2','server_admin');
-insert into admin(name, type) values('서버 관리자3','server_admin');
-insert into admin(name, type) values('상담원 John','server_admin');
-insert into admin(name, type) values('서버 관리자1','server_admin');
+insert into admin(name, type) values('서버 관리자1','server_admin'),
+('서버 관리자2','server_admin'),
+('서버 관리자3','server_admin'),
+('상담원 John','custom_service'),
+('상담원 Harry','custom_service'),
+('상담원 Lily','custom_service'),
+('상담원 Adam','custom_service');

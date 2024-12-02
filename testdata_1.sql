@@ -139,17 +139,24 @@ INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VA
 (7, 90000, '현금'),
 (8, 67000, '신용카드'),
 (9, 55000, '신용카드'),
-(10, 87000, '현금')),
-(11, 49000, '신용카드'),
-(12, 60000, '현금'),
-(13, 70000, '신용카드'),
-(14, 87000, '신용카드'),
-(15, 45000, '현금'),
-(16, 65000, '신용카드'),
-(17, 155000, '현금'),
-(18, 75000, '신용카드'),
-(19, 75000, '신용카드'),
-(20, 85000, '현금');
+(10, 87000, '현금');
+
+-- review insert
+ALTER TABLE `zagoga`.`review CHANGE COLUMN `photo` `created_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP();
+ALTER TABLE `zagoga`.`review` ADD COLUMN `photo` VARCHAR(255) NULL AFTER `star`;
+INSERT INTO review(accommodation_id, payment_id, title, content, star) 
+VALUES
+(1, 3, '정말 최고에요', '쩔때료 여뀌로 오찌 마쎼여!!', 5),
+(2, 7, '최악의 경험', '다시는 오고 싶지 않아요.', 1),
+(3, 1, '매우 만족', '깨끗하고 조용했어요.', 4),
+(4, 6, '불편했어요', '시설이 별로였어요.', 2),
+(5, 5, '완벽한 휴가', '다시 가고 싶은 곳입니다!', 5),
+(6, 8, '별로였습니다', '직원 태도가 너무 불친절했어요.', 1),
+(7, 2, '가성비 최고', '가격 대비 아주 훌륭했어요.', 4),
+(8, 6, '좀 아쉬워요', '방음이 안 돼서 시끄러웠어요.', 2),
+(9, 4, '추천합니다!', '정말 즐거운 시간이었어요.', 5),
+(10, 9, '그저 그래요', '기대했던 만큼은 아니었어요.', 2);
+
 
 -- owners insert 프로시저
 DELIMITER $$

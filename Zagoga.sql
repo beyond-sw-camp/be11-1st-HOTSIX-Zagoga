@@ -171,7 +171,8 @@ CREATE TABLE review (
 	title varchar(255) NULL,
 	content varchar(10000) NULL,
 	star int NULL,
-	photo datetime NULL DEFAULT current_timestamp(),
+	photo varchar(255) NULL,
+	created_time datetime NULL DEFAULT current_timestamp(),
 
 	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id),
 	FOREIGN KEY(payment_id) REFERENCES payment(id)

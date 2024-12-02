@@ -12,6 +12,7 @@ INSERT INTO user (name, personal_id, phone_number, email, sex, level) VALUES
 ('한지민', '012345-0123456', '010-0123-4567', 'han@example.com', '여', 'Platinum');
 
 -- owner insert
+
 insert into owner(id, name, personal_id, phone_number, account_number) values(1,'김봉삼','760507-226981','010-8765-0009','134501-329456');
 insert into owner(id, name, personal_id, phone_number, account_number) values(2,'황덕운','980103-229321','010-7775-1239','232323-733389');
 insert into owner(id, name, personal_id, phone_number, account_number) values(3,'이봉출','660108-126999','010-4443-6729','134501-329456');
@@ -22,10 +23,14 @@ insert into owner(id, name, personal_id, phone_number, account_number) values(7,
 insert into owner(id, name, personal_id, phone_number, account_number) values(8,'서명덕','861101-134687','010-4567-4511','134501-329456');
 insert into owner(id, name, personal_id, phone_number, account_number) values(9,'강신구','950818-424989','010-1918-5594','134501-329456');
 insert into owner(id, name, personal_id, phone_number, account_number) values(10,'지석삼','630404-226981','010-7766-1239','134501-329456');
+
+
 -- admin insert
 alter table admin modify column type enum('sever_admin','custom_service');
-insert into admin(name, type) values('서버 관리자1','server_admin');
-insert into admin(name, type) values('서버 관리자2','server_admin');
-insert into admin(name, type) values('서버 관리자3','server_admin');
-insert into admin(name, type) values('상담원 John','server_admin');
-insert into admin(name, type) values('서버 관리자1','server_admin');
+insert into admin(name, type) values('서버 관리자1','server_admin'),
+('서버 관리자2','server_admin'),
+('서버 관리자3','server_admin'),
+('상담원 John','custom_service'),
+('상담원 Harry','custom_service'),
+('상담원 Lily','custom_service'),
+('상담원 Adam','custom_service');

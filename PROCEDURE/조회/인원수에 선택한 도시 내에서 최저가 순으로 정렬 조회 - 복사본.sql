@@ -1,8 +1,8 @@
-﻿-- 인원수에 선택한 도시 내에서 최저가 순으로 정렬 조회
+﻿-- 인원수 및 선택한 도시 최저가 순으로 정렬 조회
 
 DELIMITER //
 
-CREATE PROCEDURE GetAccommodationsByCityAndPeople(
+CREATE PROCEDURE 인원수 및 선택한 도시 최저가 순으로 정렬 조회(
     IN p_city VARCHAR(255),
     IN p_num_people INT
 )

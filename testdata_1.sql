@@ -12,16 +12,16 @@ INSERT INTO user (name, personal_id, phone_number, email, sex, level) VALUES
 ('한지민', '012345-0123456', '010-0123-4567', 'han@example.com', '여', 'Platinum');
 
 -- owner insert
-    insert into owner(id, name, personal_id, phone_number, account_number) values(1,'김봉삼','760507-226981','010-8765-0009','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(2,'황덕운','980103-229321','010-7775-1239','232323-733389');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(3,'이봉출','660108-126999','010-4443-6729','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(4,'김문덕','691207-226986','010-1234-6649','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(5,'최봉이','501098-213381','010-5556-8869','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(6,'이향림','700323-136923','010-6574-0329','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(7,'신명춘','550631-223481','010-9993-3456','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(8,'서명덕','861101-134687','010-4567-4511','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(9,'강신구','950818-424989','010-1918-5594','134501-329456');
-    insert into owner(id, name, personal_id, phone_number, account_number) values(10,'지석삼','630404-226981','010-7766-1239','134501-329456');
+    insert into owner(id, name, personal_id, phone_number, account_number) values(1,'김봉삼','760507-226981','010-8765-0009','134501-329456'),
+    (2,'황덕운','980103-229321','010-7775-1239','232323-733389'),
+    (3,'이봉출','660108-126999','010-4443-6729','134501-329456'),
+    (4,'김문덕','691207-226986','010-1234-6649','134501-329456'),
+    (5,'최봉이','501098-213381','010-5556-8869','134501-329456'),
+    (6,'이향림','700323-136923','010-6574-0329','134501-329456'),
+    (7,'신명춘','550631-223481','010-9993-3456','134501-329456'),
+    (8,'서명덕','861101-134687','010-4567-4511','134501-329456'),
+    (9,'강신구','950818-424989','010-1918-5594','134501-329456'),
+    (10,'지석삼','630404-226981','010-7766-1239','134501-329456');
 
 -- admin insert
 alter table admin modify column type enum('server_admin','custom_service');
@@ -87,16 +87,17 @@ VALUES
 (10, 0, 0, 1, 1, 0, 0, 1);
 
 -- insert room
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(1,1,'트윈', 2, 50000,100000,0,5);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(2,2,'패밀리', 4, 80000,1500000,40000,3);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(3,2,'트윈', 2, 40000,100000,40000,10);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(4,3,'패밀리', 4, 100000,180000,0,4);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(5,4,'트윈', 2, 60000,100000,0,5);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(6,5,'트윈', 2, 80000,100000,30000,8);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(7,6,'트윈', 2, 45000,100000,50000,6);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
-insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) 
+values(1,1,'트윈', 2, 50000,100000,0,5),
+(2,2,'패밀리', 4, 80000,1500000,40000,3),
+(3,2,'트윈', 2, 40000,100000,40000,10),
+(4,3,'패밀리', 4, 100000,180000,0,4),
+(5,4,'트윈', 2, 60000,100000,0,5),
+(6,5,'트윈', 2, 80000,100000,30000,8),
+(7,6,'트윈', 2, 45000,100000,50000,6),
+(8,7,'트윈', 2, 100000,200000,0,8),
+(9,8,'패밀리', 4, 150000,300000,0,2),
+(10,9,'패밀리', 4, 100000,2000000,0,1);
 
 -- favorite_list 즐겨찾기
 INSERT INTO favorite_list (user_id, accommodation_id) VALUES
@@ -138,7 +139,7 @@ check_in_day, check_out_day, num_people) VALUES
 (9, 2, 9, '24-12-15', '24-12-16', 8), (10, 3, 10, '24-12-15', '24-12-18', 2);
 
 -- payment 결제
-INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VALUES
+INSERT INTO payment (reservation_id, total_price, payment_type) VALUES
 (1, 40000, '신용카드'),
 (2, 50000, '현금'),
 (3, 70000, '신용카드'),
@@ -151,8 +152,8 @@ INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VA
 (10, 87000, '현금');
 
 -- review insert
-ALTER TABLE `zagoga`.`review CHANGE COLUMN `photo` `created_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP();
-ALTER TABLE `zagoga`.`review` ADD COLUMN `photo` VARCHAR(255) NULL AFTER `star`;
+ALTER TABLE review CHANGE COLUMN photo created_time DATETIME NULL DEFAULT CURRENT_TIMESTAMP();
+ALTER TABLE review ADD COLUMN photo VARCHAR(255) NULL AFTER star;
 INSERT INTO review(accommodation_id, payment_id, title, content, star) 
 VALUES
 (1, 3, '정말 최고에요', '쩔때료 여뀌로 오찌 마쎼여!!', 5),

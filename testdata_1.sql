@@ -34,11 +34,7 @@ insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('상담원 Adam','custom_service');
 
 -- accomodation insert
-<<<<<<< HEAD
-insert into accommodation(owner_id, name, 
-type, address, latitue, 
-hardness, check_in_time, check_out_time, rent_time, 
-business_num) 
+insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
 values(1, "일", "hotel", "보라매로1", 1, 1.1, "오후3시", "오전11시", "4시간", "1234"),
 (2, "이", "motel", "보라매로2", 2, 2.1, "오후2시", "오전11시", "4시간", "2345"),
 (3, "삼", "pension", "보라매로3", 3, 3.1, "오후4시", "오전11시", "6시간", "3456"),

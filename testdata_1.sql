@@ -33,6 +33,28 @@ insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
 
+-- admin insert 프로시저
+DELIMITER $$
+
+CREATE PROCEDURE insert_owners()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 10000 DO
+        INSERT INTO owner (name, personal_id, phone_number, account_number, created_time, delete_owner) VALUES
+        (CONCAT('업주', i), 
+         CONCAT('P', LPAD(i, 6, '0')), 
+         CONCAT('010-', FLOOR(RAND() * 1000), '-', FLOOR(RAND() * 10000)), 
+         CONCAT('123-456-78901', i), 
+         NOW(), 
+         0);
+        SET i = i + 1;
+    END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL insert_owners();
+
 -- accomodation insert
 insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
 values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
@@ -45,3 +67,35 @@ values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4
 (8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
 (9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
 (10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
+
+-- accomodation insert 프로시저
+DELIMITER $$
+
+CREATE PROCEDURE insert_accommodations()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 10000 DO
+        INSERT INTO accommodation (owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num, update_time, delete_accommodation) VALUES
+        (FLOOR(1 + RAND() * 3), 
+         CONCAT('숙소 ', i), 
+         ELT(FLOOR(1 + RAND() * 3), 'hotel', 'motel', 'pension'), 
+         CONCAT('주소 ', i), 
+         ROUND(33 + (RAND() * 5), 6), 
+         ROUND(126 + (RAND() * 5), 6), 
+         '15:00', 
+         '11:00', 
+         '1박', 
+         CONCAT(FLOOR(100 + RAND() * 900), '-', FLOOR(100 + RAND() * 900), '-', FLOOR(1000 + RAND() * 9000)), 
+         NOW(), 
+         0);
+        SET i = i + 1;
+    END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL insert_accommodations();
+
+
+
+

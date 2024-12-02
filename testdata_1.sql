@@ -151,7 +151,7 @@ INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VA
 (19, 75000, '신용카드'),
 (20, 85000, '현금');
 
--- admin insert 프로시저
+-- owners insert 프로시저
 DELIMITER $$
 CREATE PROCEDURE insert_owners()
 BEGIN

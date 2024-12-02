@@ -28,7 +28,7 @@ alter table admin modify column type enum('server_admin','custom_service');
 insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('서버 관리자2','server_admin'),
 ('서버 관리자3','server_admin'),
-('상담원 John','custom_service'),
+('상담원 John','custom_service'), 
 ('상담원 Harry','custom_service'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
@@ -109,3 +109,6 @@ INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, ab
 (9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
 (10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
 
+
+-- coupon insert
+insert into 

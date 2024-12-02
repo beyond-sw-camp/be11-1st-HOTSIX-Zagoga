@@ -1,5 +1,5 @@
 -- user insert
-INSERT INTO user (name, personal_id, phone_number, email, sex, level, created_time, delete_user) VALUES
+INSERT INTO user (name, personal_id, phone_number, email, sex, level) VALUES
 ('홍길동', '123456-1234567', '010-1234-5678', 'hong@example.com', '남', 'Gold'),
 ('김영희', '234567-2345678', '010-2345-6789', 'kim@example.com', '여', 'Silver'),
 ('이철수', '345678-3456789', '010-3456-7890', 'lee@example.com', '남', 'Bronze'),
@@ -32,6 +32,47 @@ insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('상담원 Harry','custom_service'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
+
+-- accomodation insert
+insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
+values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
+(2, "이", "motel", "보라매로2", 2, 3, "오후2시", "오전11시", "4시간", "2345"),
+(3, "삼", "pension", "보라매로3", 3, 4, "오후4시", "오전11시", "6시간", "3456"),
+(4, "사", "hotel", "보라매로4", 4, 5, "오후5시", "오전11시", "5시간", "4567"),
+(5, "오", "motel", "보라매로5", 5, 6, "오후3시", "오전11시", "3시간", "5678"),
+(6, "육", "motel", "보라매로6", 6, 7, "오후3시", "오전11시", "4시간", "6789"),
+(7, "칠", "hotel", "보라매로7", 7, 8, "오후4시", "오전11시", "3시간", "7890"),
+(8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
+(9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
+(10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
+
+-- coupon insert
+INSERT INTO coupon(name, discount, cp_describe) VALUES 
+('생일축하쿠폰', '15%', '생일 기념 15% 할인'),
+('첫 구매 쿠폰', '5%', '첫 구매 고객 5% 할인'),
+('VIP 회원 쿠폰', '20%', 'VIP 회원 대상 20% 할인'),
+('리뷰 작성 쿠폰', '3,000원', '리뷰 작성 감사 쿠폰 3,000원 할인'),
+('주말 특가 쿠폰', '10%', '주말 한정 10% 할인'),
+('무료배송 쿠폰', '100%', '전 제품 무료배송 혜택'),
+('재구매 감사 쿠폰', '7%', '재구매 고객 대상 7% 할인'),
+('한정 이벤트 쿠폰', '50%', '한정 이벤트 50% 할인 (특정 제품 대상)'),
+('회원 추천 쿠폰', '5,000원', '추천 회원과 추천받은 회원에게 5,000원 할인'),
+('앱 설치 쿠폰', '10%', '앱 설치 시 10% 할인');
+
+-- coupon_list insert
+INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) VALUES
+(1, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(2, 2, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(3, 4, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(4, 5, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(5, 6, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(6, 7, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(7, 8, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(8, 9, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
+
+
 
 -- admin insert 프로시저
 DELIMITER $$
@@ -96,8 +137,18 @@ DELIMITER ;
 
 CALL insert_accommodations();
 
-
-
+-- accommodation_facility 숙박편의시설
+INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
+(1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
+(3, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
+(4, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, TRUE),
+(5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE),
+(6, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE),
+(7, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE),
+(8, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
+(9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
+(10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
 
 
 -- 객실
@@ -112,3 +163,17 @@ insert into room(id, accommodation_id, type, people_max, off_peak_season_price, 
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
 insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,10,'패밀리', 4, 120000,2400000,0,1);
+
+-- favorite_list 즐겨찾기
+INSERT INTO favorite_list (user_id, accommodation_id) VALUES
+(1, 1),
+(2, 2),
+(1, 3),
+(3, 4),
+(2, 5),
+(4, 6),
+(1, 7),
+(5, 8),
+(3, 9),
+(2, 10);
+

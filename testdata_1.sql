@@ -72,11 +72,22 @@ INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) V
 (9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
 (10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
 
-
+-- accommodation_facility 숙박편의시설
+INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) 
+VALUES
+(1, 1, 1, 0, 1, 0, 1, 1),
+(2, 0, 1, 1, 0, 1, 0, 0),
+(3, 1, 0, 1, 1, 1, 1, 0),
+(4, 0, 0, 0, 1, 0, 1, 1),
+(5, 1, 1, 1, 0, 1, 0, 1),
+(6, 0, 1, 0, 1, 1, 1, 0),
+(7, 1, 0, 1, 0, 0, 1, 1),
+(8, 0, 1, 1, 1, 1, 0, 0),
+(9, 1, 1, 0, 0, 1, 1, 1),
+(10, 0, 0, 1, 1, 0, 0, 1);
 
 -- admin insert 프로시저
 DELIMITER $$
-
 CREATE PROCEDURE insert_owners()
 BEGIN
     DECLARE i INT DEFAULT 1;
@@ -91,27 +102,11 @@ BEGIN
         SET i = i + 1;
     END WHILE;
 END$$
-
 DELIMITER ;
-
 CALL insert_owners();
-
--- accomodation insert
-insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
-values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
-(2, "이", "motel", "보라매로2", 2, 3, "오후2시", "오전11시", "4시간", "2345"),
-(3, "삼", "pension", "보라매로3", 3, 4, "오후4시", "오전11시", "6시간", "3456"),
-(4, "사", "hotel", "보라매로4", 4, 5, "오후5시", "오전11시", "5시간", "4567"),
-(5, "오", "motel", "보라매로5", 5, 6, "오후3시", "오전11시", "3시간", "5678"),
-(6, "육", "motel", "보라매로6", 6, 7, "오후3시", "오전11시", "4시간", "6789"),
-(7, "칠", "hotel", "보라매로7", 7, 8, "오후4시", "오전11시", "3시간", "7890"),
-(8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
-(9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
-(10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
 
 -- accomodation insert 프로시저
 DELIMITER $$
-
 CREATE PROCEDURE insert_accommodations()
 BEGIN
     DECLARE i INT DEFAULT 1;
@@ -132,24 +127,5 @@ BEGIN
         SET i = i + 1;
     END WHILE;
 END$$
-
 DELIMITER ;
-
 CALL insert_accommodations();
-
--- accommodation_facility 숙박편의시설
-INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
-(1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
-(2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
-(3, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
-(4, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, TRUE),
-(5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE),
-(6, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE),
-(7, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE),
-(8, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
-(9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
-(10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
-
-
--- coupon insert
-insert into 

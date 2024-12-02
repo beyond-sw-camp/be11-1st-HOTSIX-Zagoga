@@ -28,7 +28,7 @@ alter table admin modify column type enum('server_admin','custom_service');
 insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('서버 관리자2','server_admin'),
 ('서버 관리자3','server_admin'),
-('상담원 John','custom_service'),
+('상담원 John','custom_service'), 
 ('상담원 Harry','custom_service'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
@@ -45,3 +45,6 @@ values(1, "일", hotel, "보라매로1", "1", "1.1", "오후3시", "오전11시"
 (8, "팔", hotel, "보라매로8", "8", "8.1", "오후3시", "오전11시", "4시간", "8901"),
 (9, "구", pension, "보라매로9", "9", "9.1", "오후2시", "오전11시", "4시간", "9012"),
 (10, "십", pension, "보라매로10", "3", "2.1", "오후3시", "오전11시", "3시간", "0123");
+
+-- coupon insert
+insert into 

@@ -151,8 +151,8 @@ INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VA
 (10, 87000, '현금');
 
 -- review insert
-ALTER TABLE `zagoga`.`review CHANGE COLUMN `photo` `created_time` DATETIME NULL DEFAULT CURRENT_TIMESTAMP();
-ALTER TABLE `zagoga`.`review` ADD COLUMN `photo` VARCHAR(255) NULL AFTER `star`;
+ALTER TABLE zagoga.review CHANGE COLUMN photo created_time DATETIME NULL DEFAULT CURRENT_TIMESTAMP();
+ALTER TABLE zagoga.review ADD COLUMN photo VARCHAR(255) NULL AFTER star;
 INSERT INTO review(accommodation_id, payment_id, title, content, star) 
 VALUES
 (1, 3, '정말 최고에요', '쩔때료 여뀌로 오찌 마쎼여!!', 5),

@@ -210,3 +210,54 @@ BEGIN
 END$$
 DELIMITER ;
 CALL insert_accommodations();
+
+-- 채팅_유저_오너
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_유저_오너 (
+	IN p_owner_id BIGINT,
+	IN p_user_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('user', 'owner')
+)
+BEGIN
+	INSERT INTO cs_chat (owner_id, user_id, contents, sender)
+	VALUES (p_owner_id, p_user_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+CALL 채팅_유저_오너(1, 2, '안녕하세요, 문의드립니다.', 'user');
+
+-- 채팅_유저_상담원
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_유저_상담원 (
+	IN p_user_id BIGINT,
+	IN p_admin_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('user', 'admin')
+)
+BEGIN
+	INSERT INTO cs_chat (user_id, admin_id, contents, sender)
+	VALUES (p_user_id, p_admin_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+CALL 채팅_유저_상담원(2, 3, '상품 문의가 있어요.', 'user');
+
+-- 채팅_오너_상담원
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_오너_상담원 (
+	IN p_owner_id BIGINT,
+	IN p_admin_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('owner', 'admin')
+)
+BEGIN
+	INSERT INTO cs_chat (owner_id, admin_id, contents, sender)
+	VALUES (p_owner_id, p_admin_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+CALL 채팅_오너_상담원(1, 3, '고객 요청 처리 부탁드립니다.', 'owner');

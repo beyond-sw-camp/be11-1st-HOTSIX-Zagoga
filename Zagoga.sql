@@ -132,7 +132,7 @@ CREATE TABLE accommodation_facility (
 
 CREATE TABLE payment (
 	id bigint PRIMARY KEY NOT NULL auto_increment,
-	reservation_id bigint NOT NULL,
+	reservation_id bigint NULL,
 	total_price int NOT NULL,
 	payment_type varchar(255) NOT NULL,
 	created_time datetime NOT NULL DEFAULT current_timestamp(),
@@ -176,4 +176,13 @@ CREATE TABLE review (
 
 	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id),
 	FOREIGN KEY(payment_id) REFERENCES payment(id)
+);
+
+-- 다대다 관계 풀어내느라 새로 추가된 table
+CREATE TABLE payment_detailed_reservation (
+    payment_id BIGINT NOT NULL,
+    detailed_reservation_id BIGINT NOT NULL,
+    PRIMARY KEY (payment_id, detailed_reservation_id),
+    FOREIGN KEY (payment_id) REFERENCES payment(id),
+    FOREIGN KEY (detailed_reservation_id) REFERENCES detailed_reservation(id)
 );

@@ -33,6 +33,47 @@ insert into admin(name, type) values('서버 관리자1','server_admin'),
 ('상담원 Lily','custom_service'),
 ('상담원 Adam','custom_service');
 
+-- accomodation insert
+insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
+values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
+(2, "이", "motel", "보라매로2", 2, 3, "오후2시", "오전11시", "4시간", "2345"),
+(3, "삼", "pension", "보라매로3", 3, 4, "오후4시", "오전11시", "6시간", "3456"),
+(4, "사", "hotel", "보라매로4", 4, 5, "오후5시", "오전11시", "5시간", "4567"),
+(5, "오", "motel", "보라매로5", 5, 6, "오후3시", "오전11시", "3시간", "5678"),
+(6, "육", "motel", "보라매로6", 6, 7, "오후3시", "오전11시", "4시간", "6789"),
+(7, "칠", "hotel", "보라매로7", 7, 8, "오후4시", "오전11시", "3시간", "7890"),
+(8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
+(9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
+(10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
+
+-- coupon insert
+INSERT INTO coupon(name, discount, cp_describe) VALUES 
+('생일축하쿠폰', '15%', '생일 기념 15% 할인'),
+('첫 구매 쿠폰', '5%', '첫 구매 고객 5% 할인'),
+('VIP 회원 쿠폰', '20%', 'VIP 회원 대상 20% 할인'),
+('리뷰 작성 쿠폰', '3,000원', '리뷰 작성 감사 쿠폰 3,000원 할인'),
+('주말 특가 쿠폰', '10%', '주말 한정 10% 할인'),
+('무료배송 쿠폰', '100%', '전 제품 무료배송 혜택'),
+('재구매 감사 쿠폰', '7%', '재구매 고객 대상 7% 할인'),
+('한정 이벤트 쿠폰', '50%', '한정 이벤트 50% 할인 (특정 제품 대상)'),
+('회원 추천 쿠폰', '5,000원', '추천 회원과 추천받은 회원에게 5,000원 할인'),
+('앱 설치 쿠폰', '10%', '앱 설치 시 10% 할인');
+
+-- coupon_list insert
+INSERT INTO coupon_list(user_id, coupon_id, created_time, expire_time, usable) VALUES
+(1, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(2, 2, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(3, 4, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(4, 5, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(5, 6, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(6, 7, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(7, 8, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(8, 9, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(9, 10, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1),
+(10, 1, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 1);
+
+
+
 -- admin insert 프로시저
 DELIMITER $$
 
@@ -55,18 +96,6 @@ DELIMITER ;
 
 CALL insert_owners();
 
--- accomodation insert
-insert into accommodation(owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num) 
-values(1, "일", "hotel", "보라매로1", 1, 2, "오후3시", "오전11시", "4시간", "1234"),
-(2, "이", "motel", "보라매로2", 2, 3, "오후2시", "오전11시", "4시간", "2345"),
-(3, "삼", "pension", "보라매로3", 3, 4, "오후4시", "오전11시", "6시간", "3456"),
-(4, "사", "hotel", "보라매로4", 4, 5, "오후5시", "오전11시", "5시간", "4567"),
-(5, "오", "motel", "보라매로5", 5, 6, "오후3시", "오전11시", "3시간", "5678"),
-(6, "육", "motel", "보라매로6", 6, 7, "오후3시", "오전11시", "4시간", "6789"),
-(7, "칠", "hotel", "보라매로7", 7, 8, "오후4시", "오전11시", "3시간", "7890"),
-(8, "팔", "hotel", "보라매로8", 8, 9, "오후3시", "오전11시", "4시간", "8901"),
-(9, "구", "pension", "보라매로9", 9, 10, "오후2시", "오전11시", "4시간", "9012"),
-(10, "십", "pension", "보라매로10", 10, 11, "오후3시", "오전11시", "3시간", "0123");
 
 -- accomodation insert 프로시저
 DELIMITER $$

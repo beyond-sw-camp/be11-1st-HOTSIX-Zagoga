@@ -128,6 +128,15 @@ INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_conditi
 insert into reservation(user_id) 
 values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
 
+-- detailed_reservation insert
+INSERT INTO detailed_reservation(reservation_id, room_id, coupon_id, 
+check_in_day, check_out_day, num_people) VALUES
+(1, 1, 1, '24-12-04', '24-12-05', 2), (2, 2, 2, '24-12-05', '24-12-07', 3), 
+(3, 3, 3, '24-12-06', '24-12-09', 5), (4, 4, 4, '24-12-07', '24-12-08', 4), 
+(5, 5, 5, '24-12-08', '24-12-10', 2), (6, 6, 6, '24-12-09', '24-12-16', 6), 
+(7, 7, 7, '24-12-10', '24-12-12', 2), (8, 8, 8, '24-12-11', '24-12-18', 4), 
+(9, 2, 9, '24-12-15', '24-12-16', 8), (10, 3, 10, '24-12-15', '24-12-18', 2);
+
 -- payment 결제
 INSERT INTO payment (reservation_id, total_price, payment_type, created_time) VALUES
 (1, 40000, '신용카드'),

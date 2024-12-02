@@ -86,6 +86,49 @@ VALUES
 (9, 1, 1, 0, 0, 1, 1, 1),
 (10, 0, 0, 1, 1, 0, 0, 1);
 
+-- insert room
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(1,1,'트윈', 2, 50000,100000,0,5);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(2,2,'패밀리', 4, 80000,1500000,40000,3);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(3,2,'트윈', 2, 40000,100000,40000,10);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(4,3,'패밀리', 4, 100000,180000,0,4);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(5,4,'트윈', 2, 60000,100000,0,5);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(6,5,'트윈', 2, 80000,100000,30000,8);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(7,6,'트윈', 2, 45000,100000,50000,6);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(8,7,'트윈', 2, 100000,200000,0,8);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(9,8,'패밀리', 4, 150000,300000,0,2);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,9,'패밀리', 4, 100000,2000000,0,1);
+insert into room(id, accommodation_id, type, people_max, off_peak_season_price, peak_season_price, rent_price, count) values(10,10,'패밀리', 4, 120000,2400000,0,1);
+
+-- favorite_list 즐겨찾기
+INSERT INTO favorite_list (user_id, accommodation_id) VALUES
+(1, 1),
+(2, 2),
+(1, 3),
+(3, 4),
+(2, 5),
+(4, 6),
+(1, 7),
+(5, 8),
+(3, 9),
+(2, 10);
+
+-- room_facility 객실 편의시설
+INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_condition, has_tv, has_internet, has_ott, has_amenity, has_animal) VALUES
+(1, 1, 'Single', 1, 1, 1, 1, 0, 1, 0),
+(2, 2, 'Double', 0, 1, 0, 1, 1, 0, 1),
+(3, 1, 'Queen', 1, 0, 1, 0, 0, 1, 0),
+(4, 2, 'Single', 1, 1, 1, 1, 1, 1, 1),
+(5, 3, 'Double', 0, 0, 0, 1, 0, 0, 0),
+(6, 1, 'Queen', 1, 1, 1, 0, 1, 1, 1),
+(7, 2, 'Single', 0, 1, 0, 1, 0, 1, 0),
+(8, 3, 'Double', 1, 0, 1, 1, 1, 0, 1),
+(9, 1, 'Queen', 0, 1, 1, 0, 0, 1, 0),
+(10, 2, 'Single', 1, 1, 0, 1, 1, 1, 1);
+
+-- reservation insert
+insert into reservation(user_id) 
+values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
+
 -- admin insert 프로시저
 DELIMITER $$
 CREATE PROCEDURE insert_owners()
@@ -130,19 +173,5 @@ END$$
 DELIMITER ;
 CALL insert_accommodations();
 
--- accommodation_facility 숙박편의시설
-INSERT INTO accommodation_facility (accommodation_id, able_bbq, able_parking, able_sports, able_sauna, able_front, able_breakfast, able_swim) VALUES
-(1, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE),
-(2, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE),
-(3, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE),
-(4, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, TRUE),
-(5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE),
-(6, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE),
-(7, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE),
-(8, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
-(9, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE),
-(10, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE);
 
 
--- coupon insert
-insert into 

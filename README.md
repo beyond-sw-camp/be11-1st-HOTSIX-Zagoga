@@ -440,8 +440,15 @@ CREATE TABLE payment_detailed_reservation (
 ![스크린샷 2024-12-03 123542](https://github.com/user-attachments/assets/3ec0cd57-e8ba-4c2a-af2f-f5be14007c87)
 	
 ![스크린샷 2024-12-03 123620](https://github.com/user-attachments/assets/f30a925f-aae8-4d2a-b2d9-94f585d091e8)
+
+
+
 	
 ![스크린샷 2024-12-03 123758](https://github.com/user-attachments/assets/edbfc486-b2d6-4cfd-aaa5-3e68577c9630)
+
+
+
+
 	
 ![스크린샷 2024-12-03 123815](https://github.com/user-attachments/assets/aeaa8bf6-cf06-400b-9ba3-f35b78f8f8e1)
 

@@ -1,10 +1,8 @@
 ﻿-- 특정숙소 리뷰 전체조회
 
 DELIMITER //
-
-DELIMITER //
-CREATE PROCEDURE 특정숙소 리뷰 전체조회(
-    IN accommodation_id INT
+CREATE PROCEDURE 특정숙소_리뷰_전체조회(
+    IN 숙소id INT
 )
 BEGIN
     SELECT 
@@ -16,7 +14,7 @@ BEGIN
     FROM 
         review r
     WHERE 
-        r.accommodation_id = accommodation_id
+        r.accommodation_id = 숙소id
     ORDER BY 
         r.created_time DESC;
 END //

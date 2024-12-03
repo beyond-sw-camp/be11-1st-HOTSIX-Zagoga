@@ -200,3 +200,165 @@ CALL 결제_성수기(8,'신용카드');
 CALL 결제_비성수기(9, '신용카드');
 CALL 결제_성수기(10,'현금');
 
+--회원가입 완료(쿠폰발급)**
+DELIMITER $$
+
+CREATE PROCEDURE 회원가입(
+    IN p_name VARCHAR(255),
+    IN p_personal_id VARCHAR(255),
+    IN p_phone_number VARCHAR(255),
+    IN p_email VARCHAR(255),
+    IN p_sex ENUM('남', '여')
+)
+BEGIN
+    INSERT INTO user (name, personal_id, phone_number, email, sex, level, created_time, delete_user)
+    VALUES (p_name, p_personal_id, p_phone_number, p_email, p_sex, 'Bronze', CURRENT_TIMESTAMP(), 0);
+    
+    SET @user_id = LAST_INSERT_ID();
+    
+    
+    SET @coupon_id = 2; 
+    
+    INSERT INTO coupon_list (user_id, coupon_id, created_time, usable)
+    VALUES (@user_id, @coupon_id, CURRENT_TIMESTAMP(), 1); 
+    
+    SELECT @user_id AS user_id, @coupon_id AS coupon_id;
+    
+END$$
+
+DELIMITER ;
+
+
+-- 리뷰작성(결제한 사람만)**
+DELIMITER $$
+
+CREATE PROCEDURE 리뷰작성(
+    IN p_user_id BIGINT,       
+    IN p_accommodation_id BIGINT,
+    IN p_payment_id BIGINT, 
+    IN p_title VARCHAR(255),
+    IN p_content TEXT,               
+    IN p_star INT,                   
+    IN p_photo VARCHAR(255)            
+)
+BEGIN
+    DECLARE payment_exists INT;
+    
+    SELECT COUNT(*) INTO payment_exists
+    FROM payment p
+    WHERE p.reservation_id IN (SELECT r.id FROM reservation r WHERE r.user_id = p_user_id)
+    AND p.id = p_payment_id;
+    
+    IF payment_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '미결제 고객은 이용할 수 없습니다.';
+    ELSE
+        INSERT INTO review (accommodation_id, payment_id, title, content, star, photo, created_time)
+        VALUES (p_accommodation_id, p_payment_id, p_title, p_content, p_star, p_photo, CURRENT_TIMESTAMP());
+        
+        SELECT '작성이 완료되었습니다!' AS message;
+    END IF;
+END$$
+
+DELIMITER ;
+
+--내리뷰확인
+DELIMITER $$
+
+CREATE PROCEDURE 내가쓴리뷰조회(IN p_user_id BIGINT)
+BEGIN
+    SELECT 
+        r.id AS review_id,
+        a.name AS accommodation_name,
+        a.type AS accommodation_type,
+        r.title AS review_title,
+        r.content AS review_content,
+        r.star AS review_star,
+        r.photo AS review_photo,
+        r.created_time AS review_created_time
+    FROM 
+        review r
+    JOIN 
+        accommodation a ON r.accommodation_id = a.id
+    WHERE 
+        r.payment_id IN (SELECT p.id FROM payment p WHERE p.reservation_id IN 
+                        (SELECT r.id FROM reservation r WHERE r.user_id = p_user_id))
+    ORDER BY 
+        r.created_time DESC;
+    
+END$$
+
+DELIMITER ;
+
+-- 유저정보조회
+DELIMITER $$
+
+CREATE PROCEDURE 유저정보조회(IN p_user_id BIGINT)
+BEGIN
+    SELECT 
+        id AS user_id,
+        name,
+        personal_id,
+        phone_number,
+        email,
+        sex,
+        level,
+        created_time,
+        delete_user
+    FROM 
+        user
+    WHERE 
+        id = p_user_id;
+END$$
+
+DELIMITER ;
+
+
+--쿠폰등록
+DELIMITER $$
+
+CREATE PROCEDURE 새쿠폰등록(
+    IN p_name VARCHAR(255),         
+    IN p_discount VARCHAR(255),         
+    IN p_cp_describe VARCHAR(255)       
+)
+BEGIN
+    INSERT INTO coupon (name, discount, cp_describe, update_time)
+    VALUES (p_name, p_discount, p_cp_describe, CURRENT_TIMESTAMP());
+    
+    SELECT '쿠폰 등록이 완료되었습니다.' AS message;
+END$$
+
+DELIMITER ;
+
+
+
+--쿠폰조회시 만료기간지났으면 사용불가처리
+DELIMITER $$
+
+CREATE PROCEDURE 쿠폰조회2(IN p_user_id BIGINT)
+BEGIN
+    SELECT 
+        u.name AS user_name,           
+        c.id AS coupon_id,          
+        c.name AS coupon_name,      
+        c.discount AS coupon_discount, 
+        c.cp_describe AS coupon_description, 
+        cl.created_time AS coupon_created_time, 
+        cl.expire_time AS coupon_expire_time,  
+        CASE
+            WHEN cl.expire_time < CURRENT_TIMESTAMP THEN '사용불가' 
+            ELSE DATE_FORMAT(cl.expire_time, '%Y-%m-%d')  
+        END AS coupon_status
+    FROM 
+        coupon_list cl
+    JOIN 
+        coupon c ON cl.coupon_id = c.id
+    JOIN 
+        user u ON cl.user_id = u.id
+    WHERE 
+        cl.user_id = p_user_id
+    ORDER BY 
+        cl.created_time DESC;  
+END$$
+
+DELIMITER ;

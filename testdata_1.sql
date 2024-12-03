@@ -124,6 +124,7 @@ INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_conditi
 (8, 3, 'Double', 1, 0, 1, 1, 1, 0, 1),
 (9, 1, 'Queen', 0, 1, 1, 0, 0, 1, 0),
 (10, 2, 'Single', 1, 1, 0, 1, 1, 1, 1);
+-------------------------------------------------------------------------------------------------
 
 -- reservation insert
 insert into reservation(user_id) 

@@ -308,15 +308,311 @@ CREATE TABLE payment_detailed_reservation (
 <br/>
 
 # 🌟 프로시저 실행결과
+<details>
+<summary><b>1. 업주 회원 가입</b></summary>
+<div markdown="1">
 
-> 🔑 1. 회원가입
 
-<img src="" width=30%><img src="" width=30%>
-<img src="" width=30%>
+</div>
+</details>
 
-> 2. 조회
+<details>
+<summary><b>2. 업소등록</b></summary>
+<div markdown="1">
 
-<img src="" width=30%><img src="" width=30%>
-<img src="" width=30%>
 
+</div>
+</details>
+
+<details>
+<summary><b>3. 업소 편의시설 등록</b></summary>
+<div markdown="1">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>4. 객실 등록</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>5. 객실별 편의시설 등록</b></summary>
+<div markdown="1">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>6. 내 업소 예약확인</b></summary>
+<div markdown="1">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>7. 내 업소 월별 매출 확인</b></summary>
+<div markdown="1">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>8. 내 업소 기간별 매출 확인</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>9. 내 업소 리뷰 확인하기</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>10. 유저 회원가입 + 신규 회원 쿠폰 자동 지급</b></summary>
+<div markdown="1">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>11. 결제한 유저에 한 해 리뷰 작성하기</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>12. 내가 작성한 리뷰 확인하기</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>13. 유저 등급조회 - 나 골드회원이야</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>14. 내가 예약한 숙소 확인</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>15. 내가 보유한 쿠폰 확인</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>16. 쿠폰 등록</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>17. 쿠폰조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>18. (유저) 쿠폰 다운</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>19.인원수 선택도시 최저가 순 정렬 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>20. 인원수 선택도시 리뷰 많은 순 정렬 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>21. 인원수 선택도시 별점 높은 순 정렬 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>22. 선택한 숙소 리뷰 전체 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>23. 숙소 상세정보조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>24.내근처숙소조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>25. 선택한 객실 예약을 위한 정보 입력 </b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>26. 여러개 객실 예약 한번에 결제 가능-비성수기 가격</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>27. 여러개 객실 예약 한번에 결제 가능-성수기 가격</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>28. 여러개 객실 예약 한번에 결제 가능-대실 가격</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>29.예약 정보 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>30.채팅 메세지 db 저장(유저-오너)</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>31. 채팅 메세지 db 저장(유저-상담원)</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>32. 채팅 메세지 db 저장(오너-상담원)</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>33. 내가 보낸 채팅 메세지 조회</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>34. 업주 생성- 프로시저 (10,000개)</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
+
+<details>
+<summary><b>35. 숙소 생성- 프로시저 (10,000개)</b></summary>
+<div markdown="1">
+
+
+
+</div>
+</details>
 

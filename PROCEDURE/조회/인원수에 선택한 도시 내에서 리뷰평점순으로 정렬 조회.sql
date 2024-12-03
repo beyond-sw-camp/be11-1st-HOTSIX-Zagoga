@@ -11,7 +11,6 @@ BEGIN
         a.id AS accommodation_id,
         a.name AS accommodation_name,
         a.address AS accommodation_address,
-        MAX(r.people_max) AS max_capacity,
         AVG(rv.star) AS average_rating
     FROM 
         accommodation a

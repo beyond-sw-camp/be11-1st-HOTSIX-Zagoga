@@ -483,38 +483,41 @@ CREATE TABLE payment_detailed_reservation (
 	
 ![스크린샷 2024-12-03 123913](https://github.com/user-attachments/assets/d4181955-54e3-4729-a618-2d756b2e7f0d)
 
-![스크린샷 2024-12-03 123920](https://github.com/user-attachments/assets/d2fb12eb-30d9-4099-a7a5-4eeb18d0a081)
-
+![스크린샷 2024-12-03 123920](https://github.com/user-attachments/assets/daec1941-461b-449f-bcec-f435d0439063)
 
 </div>
 </details>
 
+
 <details>
-<summary><b>14. 내가 예약한 숙소 확인</b></summary>
+<summary><b>14. 내가 보유한 쿠폰 확인</b></summary>
 <div markdown="1">
-	
-![스크린샷 2024-12-03 123941](https://github.com/user-attachments/assets/119b6c6f-b1a3-4ea5-8155-9736a34e470e)
+
+ ![스크린샷 2024-12-03 123941](https://github.com/user-attachments/assets/119b6c6f-b1a3-4ea5-8155-9736a34e470e)
 
 ![스크린샷 2024-12-03 123947](https://github.com/user-attachments/assets/c0ca932f-98d4-4260-9af8-7630b9921dba)
 
 
+
+
 </div>
 </details>
 
 <details>
-<summary><b>15. 내가 보유한 쿠폰 확인</b></summary>
+<summary><b>15. 쿠폰 등록</b></summary>
 <div markdown="1">
 	
 ![스크린샷 2024-12-03 124041](https://github.com/user-attachments/assets/f1b0e695-771a-4fed-9f80-0731f99a7ef6)
 
-![스크린샷 2024-12-03 124046](https://github.com/user-attachments/assets/ad592b9a-d336-4c6b-9b93-dbe4383679c7)
+![스크린샷 2024-12-03 124046](https://github.com/user-attachments/assets/ad592b9a-d336-4c6b-9b93-dbe4383679c7)	
 
 
 </div>
 </details>
 
+
 <details>
-<summary><b>16. 쿠폰 등록</b></summary>
+<summary><b>16. (유저) 쿠폰 다운</b></summary>
 <div markdown="1">
 	
 ![스크린샷 2024-12-03 124413](https://github.com/user-attachments/assets/5ca583a8-2077-4aa9-b241-da60231ff952)
@@ -525,26 +528,9 @@ CREATE TABLE payment_detailed_reservation (
 </div>
 </details>
 
-<details>
-<summary><b>17. 쿠폰조회</b></summary>
-<div markdown="1">
-
-
-
-</div>
-</details>
 
 <details>
-<summary><b>18. (유저) 쿠폰 다운</b></summary>
-<div markdown="1">
-
-
-
-</div>
-</details>
-
-<details>
-<summary><b>19.인원수 선택도시 최저가 순 정렬 조회</b></summary>
+<summary><b>17.인원수 선택도시 최저가 순 정렬 조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 110801](https://github.com/user-attachments/assets/08646bf9-8472-4373-b70f-3fd431628f55)
@@ -556,7 +542,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>20. 인원수 선택도시 리뷰 많은 순 정렬 조회</b></summary>
+<summary><b>18. 인원수 선택도시 리뷰 많은 순 정렬 조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 111347](https://github.com/user-attachments/assets/477b735b-66d0-43fe-ab8c-3334ff40057e)
@@ -567,7 +553,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>21. 인원수 선택도시 별점 높은 순 정렬 조회</b></summary>
+<summary><b>19. 인원수 선택도시 별점 높은 순 정렬 조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 111846](https://github.com/user-attachments/assets/0c6619fb-ffae-45bd-92ff-188ef8dcbd28)
@@ -579,7 +565,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>22. 선택한 숙소 리뷰 전체 조회</b></summary>
+<summary><b>20. 선택한 숙소 리뷰 전체 조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 112000](https://github.com/user-attachments/assets/956cac89-996c-4190-beb4-fd93c4a60285)
@@ -590,7 +576,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>23. 숙소 상세정보조회</b></summary>
+<summary><b>21. 숙소 상세정보조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 112240](https://github.com/user-attachments/assets/1c57e31b-82fc-4047-aa88-519d0556bfd5)
@@ -601,7 +587,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>24.내근처숙소조회</b></summary>
+<summary><b>22.내근처숙소조회</b></summary>
 <div markdown="1">
 
 ![스크린샷 2024-12-03 112453](https://github.com/user-attachments/assets/c37aba80-2516-42ee-8788-667c81e7ceb0)
@@ -613,7 +599,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>25. 선택한 객실 예약을 위한 정보 입력 </b></summary>
+<summary><b>23. 선택한 객실 예약을 위한 정보 입력 </b></summary>
 <div markdown="1">
 
 장바구니에 담은 객실들을 한 번에 결제가 가능하게끔 설계하기 위해,
@@ -661,7 +647,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary><b>26. 가격에 따른 다른 결제 프로시저</b></summary>
+<summary><b>24. 가격에 따른 다른 결제 프로시저</b></summary>
 <div markdown="1">
 
 결제 금액을 비성수기/성수기/대실 을 나누어 설정해뒀다.
@@ -675,7 +661,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary><b>27. 여러개 객실 예약 한번에 결제 가능-비성수기 가격</b></summary>
+<summary><b>25. 여러개 객실 예약 한번에 결제 가능-비성수기 가격</b></summary>
 <div markdown="1">
 미리 user_id가 8인 사람에게 숙박 장바구니를 넣어두었다.
 결제를 진행한 후, created_time 최신순에 따라 결제 내역을 출력하도록 프로시저를 구성했다.
@@ -731,7 +717,7 @@ DELIMITER ;
 </div>
 </details>
 <details>
-<summary><b>28.예약 정보 조회</b></summary>
+<summary><b>26.예약 정보 조회</b></summary>
 <div markdown="1">
 user_id로 자신이 예약한 정보를 조회하는 프로시저이다.
 <img width="368" alt="결제_정보_조회_프로시저_1" src="https://github.com/user-attachments/assets/6762cf22-16d3-4e8c-975e-f86d417cdeec">
@@ -769,7 +755,7 @@ DELIMITER ;
 </div>
 </details>
 <details>
-<summary><b>29. 채팅 메세지 db 저장</b></summary>
+<summary><b>27. 채팅 메세지 db 저장</b></summary>
 <div markdown="1">
 채팅 프로시저에서는 유저-상담원, 오너-상담원, 유저-오너를
 input id 값으로 구분하고, sender을 통해 메세지의 수신자를 판단한다.
@@ -794,7 +780,7 @@ DELIMITER ;
 </div>
 </details>
 <details>
-<summary><b>30. 내가 보낸 채팅 메세지 조회</b></summary>
+<summary><b>28. 내가 보낸 채팅 메세지 조회</b></summary>
 <div markdown="1">
 내가 쓴 채팅을 조회하기 위해, sender를 검색한다.
 sender는 user, owner, admin 모두가 될 수 있기 때문에,
@@ -826,7 +812,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary><b>31. 업주 생성- 프로시저 (10,000개)</b></summary>
+<summary><b>29. 업주 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 	
 ```sql
@@ -854,7 +840,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary><b>32. 숙소 생성- 프로시저 (10,000개)</b></summary>
+<summary><b>30. 숙소 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
 ```sql

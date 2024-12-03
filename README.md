@@ -35,7 +35,9 @@
 <br/>
 
 # ERD
-![Zagoga](https://github.com/user-attachments/assets/766de641-41e9-4bcb-b4d3-b9d159dea631)
+
+![Zagoga_erd](https://github.com/user-attachments/assets/49f4fdab-46f5-4de8-97a0-b0d441eee0a8)
+
 
 ---
 <br/>

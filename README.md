@@ -424,6 +424,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>10. 유저 회원가입 + 신규 회원 쿠폰 자동 지급</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 122755](https://github.com/user-attachments/assets/47712a9c-5f97-4b49-a796-784fab30f737)
+
+![스크린샷 2024-12-03 122920](https://github.com/user-attachments/assets/73bc129f-73cb-4322-8fd7-20831c840c2d)
 
 
 </div>
@@ -432,6 +436,14 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>11. 결제한 유저에 한 해 리뷰 작성하기</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 123542](https://github.com/user-attachments/assets/3ec0cd57-e8ba-4c2a-af2f-f5be14007c87)
+	
+![스크린샷 2024-12-03 123620](https://github.com/user-attachments/assets/f30a925f-aae8-4d2a-b2d9-94f585d091e8)
+	
+![스크린샷 2024-12-03 123758](https://github.com/user-attachments/assets/edbfc486-b2d6-4cfd-aaa5-3e68577c9630)
+	
+![스크린샷 2024-12-03 123815](https://github.com/user-attachments/assets/aeaa8bf6-cf06-400b-9ba3-f35b78f8f8e1)
 
 
 
@@ -441,6 +453,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>12. 내가 작성한 리뷰 확인하기</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 123837](https://github.com/user-attachments/assets/9c224111-7ed6-4a4e-8bb4-5f3db297960c)
+	
+![스크린샷 2024-12-03 123851](https://github.com/user-attachments/assets/599b3923-c5a1-4b0c-b390-b37e3168a338)
 
 
 
@@ -450,7 +466,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>13. 유저 등급조회 - 나 골드회원이야</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 123913](https://github.com/user-attachments/assets/d4181955-54e3-4729-a618-2d756b2e7f0d)
 
+![스크린샷 2024-12-03 123920](https://github.com/user-attachments/assets/d2fb12eb-30d9-4099-a7a5-4eeb18d0a081)
 
 
 </div>
@@ -459,7 +478,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>14. 내가 예약한 숙소 확인</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 123941](https://github.com/user-attachments/assets/119b6c6f-b1a3-4ea5-8155-9736a34e470e)
 
+![스크린샷 2024-12-03 123947](https://github.com/user-attachments/assets/c0ca932f-98d4-4260-9af8-7630b9921dba)
 
 
 </div>
@@ -468,7 +490,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>15. 내가 보유한 쿠폰 확인</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 124041](https://github.com/user-attachments/assets/f1b0e695-771a-4fed-9f80-0731f99a7ef6)
 
+![스크린샷 2024-12-03 124046](https://github.com/user-attachments/assets/ad592b9a-d336-4c6b-9b93-dbe4383679c7)
 
 
 </div>
@@ -477,7 +502,10 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>16. 쿠폰 등록</b></summary>
 <div markdown="1">
+	
+![스크린샷 2024-12-03 124413](https://github.com/user-attachments/assets/5ca583a8-2077-4aa9-b241-da60231ff952)
 
+![스크린샷 2024-12-03 124422](https://github.com/user-attachments/assets/713de863-a89f-4e1e-a368-851fd78da2e1)
 
 
 </div>

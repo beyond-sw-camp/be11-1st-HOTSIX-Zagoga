@@ -572,6 +572,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>25. 선택한 객실 예약을 위한 정보 입력 </b></summary>
 <div markdown="1">
 
+<img width="368" alt="예약_객실_프로시저_1" src="https://github.com/user-attachments/assets/f6dee1c7-37d9-4b4d-aaae-111b8872cadb">
+
+
 
 
 </div>

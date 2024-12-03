@@ -666,6 +666,7 @@ DELIMITER ;
 미리 user_id가 8인 사람에게 숙박 장바구니를 넣어두었다.
 결제를 진행한 후, created_time 최신순에 따라 결제 내역을 출력하도록 프로시저를 구성했다.
 <img width="592" alt="결제_단체_예시" src="https://github.com/user-attachments/assets/44cbd022-c454-4071-b970-739a557112fe">
+	
 ```sql
 DELIMITER $$
 CREATE PROCEDURE 결제_비성수기(
@@ -714,16 +715,20 @@ BEGIN
 END$$
 DELIMITER ;
 ```
+
 </div>
 </details>
+
 <details>
 <summary><b>26.예약 정보 조회</b></summary>
 <div markdown="1">
-user_id로 자신이 예약한 정보를 조회하는 프로시저이다.
+user_id로 자신이 예약한 정보를 조회하는 프로시저이다. <br/>
 <img width="368" alt="결제_정보_조회_프로시저_1" src="https://github.com/user-attachments/assets/6762cf22-16d3-4e8c-975e-f86d417cdeec">
-아래 이미지는 user_id를 8로 검색했을 때, 나오는 결과이다.
-사실, payment_time 최신순 정렬을 까먹었다.
+<br/>
+아래 이미지는 user_id를 8로 검색했을 때, 나오는 결과이다.<br/>
+사실, payment_time 최신순 정렬을 까먹었다.<br/>
 <img width="956" alt="결제_정보_조회_프로시저_1_결과" src="https://github.com/user-attachments/assets/a8c443cc-7724-47f2-859e-dab40fbb6e21">
+	
 ```sql
 DELIMITER $$
 CREATE PROCEDURE 조회_결제_예약_정보(
@@ -752,8 +757,10 @@ BEGIN
 END$$
 DELIMITER ;
 ```
+
 </div>
 </details>
+
 <details>
 <summary><b>27. 채팅 메세지 db 저장</b></summary>
 <div markdown="1">
@@ -761,6 +768,7 @@ DELIMITER ;
 input id 값으로 구분하고, sender을 통해 메세지의 수신자를 판단한다.
 cs_chat table 에서 user_id, owner_id, admin_id를 모두 fk, null 로 받는다.
 아래는 유저-상담원 채팅 프로시저 sql문이다.
+	
 ```sql
 DELIMITER $$
 CREATE PROCEDURE 채팅_유저_상담원 (
@@ -775,10 +783,12 @@ BEGIN
 END$$
 DELIMITER ;
 ```
-아래 사진은 오너-상담원 채팅 프로시저를 사용한 모습이다.
+
+아래 사진은 오너-상담원 채팅 프로시저를 사용한 모습이다.<br/>
 <img width="379" alt="채팅 프로시져" src="https://github.com/user-attachments/assets/e2edb7b5-116e-41d2-9577-ea004b2a1171">
 </div>
 </details>
+
 <details>
 <summary><b>28. 내가 보낸 채팅 메세지 조회</b></summary>
 <div markdown="1">

@@ -8,7 +8,7 @@
 ---
  <br/>
 
-## ✨Team HOT SIX
+# ✨Team HOT SIX
 
 |추가연|김진영|이준서|장기현|
 |:-:|:-:|:-:|:-:|
@@ -16,36 +16,272 @@
 |[@gayeon99](https://github.com/gayeon99)|[@jykim1187](https://github.com/jykim1187)|[@LetsSeeTerrapin](https://github.com/LetsSeeterrapin)|[@ki-hyun-Jang](https://github.com/ki-hyun-Jang)|
 
  
-## ⭐️ 프로젝트 소개
+# ⭐️ 프로젝트 소개
 
 
 ---
 <br/>
 
-## WBS
+# WBS
 ![WBS](https://github.com/user-attachments/assets/6b13b529-1aa6-40c4-8a5c-ac30afa9698b)
 
 ---
 <br/>
 
-## 요구사항 정의서
+# 요구사항 정의서
 ![요구사항 정의서](https://github.com/user-attachments/assets/0713e05f-7d02-47f4-9234-ab0ddff0010b)
 
 ---
 <br/>
 
-## ERD
+# ERD
 ![Zagoga](https://github.com/user-attachments/assets/766de641-41e9-4bcb-b4d3-b9d159dea631)
 
 ---
 <br/>
 
-## Schema
+# Schema
+## 1. 유저
+```sql
+CREATE TABLE user (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	name varchar(255) NULL,
+	personal_id varchar(255) NOT NULL,
+	phone_number varchar(255) NOT NULL,
+	email varchar(255) NULL,
+	sex enum('남', '여') NULL,	
+	level enum('Bronze', 'Silver','Gold','Platinum','Vip') NULL DEFAULT 'Bronze',
+	created_time datetime NULL DEFAULT current_timestamp(),
+	delete_user tinyint NULL DEFAULT 0
+);
+
+```
+
+## 2. 업주
+```sql
+CREATE TABLE owner (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	name varchar(255) NULL,
+	personal_id varchar(255) NOT NULL,
+	phone_number varchar(255) NOT NULL,
+	account_number varchar(255) NOT NULL,
+	created_time datetime NULL DEFAULT current_timestamp(),
+	delete_owner tinyint NULL DEFAULT 0
+);
+```
+
+## 3. 관리자
+```sql
+CREATE TABLE admin (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	name varchar(255) NULL,
+	type enum('server_admin','customer_service') NULL,
+	created_time datetime NULL DEFAULT current_timestamp()
+);
+```
+
+## 4. CS 채팅
+```sql
+CREATE TABLE cs_chat (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	owner_id bigint NULL,
+	user_id bigint NULL,
+	admin_id bigint NULL,
+	contents varchar(3000) NULL,
+	created_time datetime NULL DEFAULT current_timestamp(),
+	sender enum('user','owner', 'admin') NULL,
+
+	FOREIGN KEY(owner_id) REFERENCES owner(id),
+	FOREIGN KEY(user_id) REFERENCES user(id),
+	FOREIGN KEY(admin_id) REFERENCES admin(id)
+);
+```
+
+## 5. 쿠폰
+```sql
+CREATE TABLE coupon (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	name varchar(255) NOT NULL,
+	discount varchar(255) NOT NULL,
+	cp_describe varchar(255) NULL,
+	update_time datetime NULL DEFAULT current_timestamp()
+);
+```
+
+## 6. 숙소
+```sql
+CREATE TABLE accommodation (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	owner_id bigint NOT NULL,
+	name varchar(255) NOT NULL,
+	type enum('hotel','motel','pension') NOT NULL,
+	address varchar(255) NOT NULL,
+	latitue decimal(9,6) NOT NULL,
+	hardness decimal(9,6) NOT NULL,
+	check_in_time varchar(255) NULL,
+	check_out_time varchar(255) NULL,
+	rent_time varchar(255) NULL,
+	business_num varchar(255) NOT NULL,
+	update_time datetime NULL DEFAULT current_timestamp(),
+	delete_accommodation tinyint NULL DEFAULT 0,
+
+	FOREIGN KEY(owner_id) REFERENCES owner(id)
+);
+```
+
+## 7. 방
+```sql
+CREATE TABLE room (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	accommodation_id bigint NOT NULL,
+	type varchar(255) NOT NULL,
+	people_max int NOT NULL,
+	off_peak_season_price int NOT NULL,
+	peak_season_price int NOT NULL,
+	rent_price int NULL,
+	count int NULL,
+
+	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id)
+);
+```
+
+## 8. 방 편의시설
+```sql
+CREATE TABLE room_facility (
+	id bigint	PRIMARY KEY NOT NULL auto_increment,
+	room_id bigint NOT NULL,
+	bed_num int NULL DEFAULT 1,
+	bed_type enum('Single','Double','Queen') NULL DEFAULT 'Single',
+	has_bath tinyint NULL DEFAULT 0,
+	has_air_condition tinyint	NULL DEFAULT 0,
+	has_tv tinyint NULL DEFAULT 0,
+	has_internet tinyint NULL DEFAULT 0,
+	has_ott tinyint NULL DEFAULT 0,
+	has_amenity tinyint NULL DEFAULT 0,
+	has_animal tinyint NULL DEFAULT 0,
+
+	FOREIGN KEY(room_id) REFERENCES room(id)
+);
+```
+
+## 9. 예약
+```sql
+CREATE TABLE reservation (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	user_id bigint NOT NULL,
+	
+	FOREIGN KEY(user_id) REFERENCES user(id)
+);
+```
+
+## 10. 쿠폰리스트
+```sql
+CREATE TABLE coupon_list (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	user_id bigint NOT NULL,
+	coupon_id bigint NOT NULL,
+	created_time datetime NULL DEFAULT current_timestamp(),
+	expire_time datetime NULL,
+	usable tinyint NULL DEFAULT 0,
+
+	FOREIGN KEY(user_id) REFERENCES user(id),
+	FOREIGN KEY(coupon_id) REFERENCES coupon(id)
+);
+```
+
+## 11. 숙소 편의시설
+```sql
+CREATE TABLE accommodation_facility (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	accommodation_id bigint NOT NULL,
+	able_bbq tinyint NULL DEFAULT 0,
+	able_parking tinyint NULL DEFAULT 0,
+	able_sports tinyint NULL DEFAULT 0,
+	able_sauna tinyint NULL DEFAULT 0,
+	able_front tinyint NULL DEFAULT 0,
+	able_breakfast tinyint NULL DEFAULT 0,
+	able_swim tinyint	NULL DEFAULT 0,
+
+	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id)
+);
+```
+
+## 12. 결제
+```sql
+CREATE TABLE payment (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	reservation_id bigint NULL,
+	total_price int NOT NULL,
+	payment_type varchar(255) NOT NULL,
+	created_time datetime NOT NULL DEFAULT current_timestamp(),
+
+	FOREIGN KEY(reservation_id) REFERENCES reservation(id)
+);
+```
+
+## 13. 즐겨찾기
+```sql
+CREATE TABLE favorite_list (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	user_id bigint NOT NULL,
+	accommodation_id bigint NOT NULL,
+
+	FOREIGN KEY(user_id) REFERENCES user(id),
+	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id)
+);
+```
+
+## 14. 상세예약
+```sql
+CREATE TABLE detailed_reservation (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	reservation_id bigint NOT NULL,
+	room_id bigint NOT NULL,
+	coupon_id bigint NOT NULL,
+	check_in_day date NOT NULL,
+	check_out_day date NOT NULL,
+	num_people int NOT NULL,
+	created_time datetime	NULL DEFAULT current_timestamp(),
+
+	FOREIGN KEY(reservation_id) REFERENCES reservation(id),
+	FOREIGN KEY(room_id) REFERENCES room(id),
+	FOREIGN KEY(coupon_id) REFERENCES coupon(id)
+);
+```
+
+## 15. 리뷰
+```sql
+CREATE TABLE review (
+	id bigint PRIMARY KEY NOT NULL auto_increment,
+	accommodation_id bigint NOT NULL,
+	payment_id bigint NOT NULL,
+	title varchar(255) NULL,
+	content varchar(10000) NULL,
+	star int NULL,
+	photo varchar(255) NULL,
+	created_time datetime NULL DEFAULT current_timestamp(),
+
+	FOREIGN KEY(accommodation_id) REFERENCES accommodation(id),
+	FOREIGN KEY(payment_id) REFERENCES payment(id)
+);
+```
+
+## 16. 결제 상세 예약
+```sql
+CREATE TABLE payment_detailed_reservation (
+    payment_id BIGINT NOT NULL,
+    detailed_reservation_id BIGINT NOT NULL,
+    PRIMARY KEY (payment_id, detailed_reservation_id),
+    FOREIGN KEY (payment_id) REFERENCES payment(id),
+    FOREIGN KEY (detailed_reservation_id) REFERENCES detailed_reservation(id)
+);
+```
+
 
 ---
 <br/>
 
-## 프로젝트 시나리오 
+# 프로젝트 시나리오 
 **유저 시나리오 남자**  
 처음으로 썸녀와 데이트를 한 진영이. 좋은 하루를 보내고 집으로 가려던 길.<br/>
 좀 아쉽다.. <br/>
@@ -71,7 +307,7 @@
 ---
 <br/>
 
-## 🌟 프로시저 실행결과
+# 🌟 프로시저 실행결과
 
 > 🔑 1. 회원가입
 

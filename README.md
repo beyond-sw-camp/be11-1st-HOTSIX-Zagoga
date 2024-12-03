@@ -467,7 +467,10 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>19.인원수 선택도시 최저가 순 정렬 조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 110801](https://github.com/user-attachments/assets/08646bf9-8472-4373-b70f-3fd431628f55)
 
+
+![스크린샷 2024-12-03 111200](https://github.com/user-attachments/assets/5467d1ca-d0fb-4a42-a1e6-cc5c8a91a89d)
 
 </div>
 </details>
@@ -476,7 +479,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>20. 인원수 선택도시 리뷰 많은 순 정렬 조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 111347](https://github.com/user-attachments/assets/477b735b-66d0-43fe-ab8c-3334ff40057e)
 
+![스크린샷 2024-12-03 111503](https://github.com/user-attachments/assets/35360238-afa8-4069-af05-4e2706496e8e)
 
 </div>
 </details>
@@ -485,6 +490,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>21. 인원수 선택도시 별점 높은 순 정렬 조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 111846](https://github.com/user-attachments/assets/0c6619fb-ffae-45bd-92ff-188ef8dcbd28)
+
+![스크린샷 2024-12-03 111904](https://github.com/user-attachments/assets/f327ed61-c051-4399-8143-032a8131147d)
 
 
 </div>
@@ -494,7 +502,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>22. 선택한 숙소 리뷰 전체 조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 112000](https://github.com/user-attachments/assets/956cac89-996c-4190-beb4-fd93c4a60285)
 
+![스크린샷 2024-12-03 112054](https://github.com/user-attachments/assets/932064f2-767a-4565-bde7-19c33770d0aa)
 
 </div>
 </details>
@@ -503,7 +513,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>23. 숙소 상세정보조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 112240](https://github.com/user-attachments/assets/1c57e31b-82fc-4047-aa88-519d0556bfd5)
 
+![스크린샷 2024-12-03 112313](https://github.com/user-attachments/assets/da8ae376-bc95-4e50-b2ac-c595677af303)
 
 </div>
 </details>
@@ -512,6 +524,9 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>24.내근처숙소조회</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 112453](https://github.com/user-attachments/assets/c37aba80-2516-42ee-8788-667c81e7ceb0)
+
+![스크린샷 2024-12-03 112538](https://github.com/user-attachments/assets/1ccd329f-836e-4459-b29b-98c95e2bdf21)
 
 
 </div>
@@ -602,6 +617,7 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>34. 업주 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 112749](https://github.com/user-attachments/assets/d8fe4fc7-6989-4d06-bdfa-f521f0eabcc3)
 
 
 </div>
@@ -611,6 +627,7 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>35. 숙소 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
+![스크린샷 2024-12-03 112636](https://github.com/user-attachments/assets/e18731b9-c4d2-41a6-b822-2d8e93cee235)
 
 
 </div>

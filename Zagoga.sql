@@ -153,7 +153,7 @@ CREATE TABLE detailed_reservation (
 	id bigint PRIMARY KEY NOT NULL auto_increment,
 	reservation_id bigint NOT NULL,
 	room_id bigint NOT NULL,
-	coupon_id bigint NOT NULL,
+	coupon_id bigint NULL,
 	check_in_day date NOT NULL,
 	check_out_day date NOT NULL,
 	num_people int NOT NULL,

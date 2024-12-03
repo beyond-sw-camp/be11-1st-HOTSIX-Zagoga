@@ -1,6 +1,9 @@
 -- 예약_객실
 -- 쿠폰을 쓸수도, 안쓸 수도 있어서 여기 null 로 바꿔야함
 -- ALTER TABLE detailed_reservation MODIFY coupon_id BIGINT NULL;
+-- 여기에서 장바구니에 담은 객실들을 한번에 결제하고 싶었는데, 예약 테이블의 id가 중복되서 지속적으로 사용될 수 있는
+-- 문제점을 발견함. 예약테이블에 생성시간과 결제완료 여부 칼럼을 추가해서 결제 정보랑 확인 후에 해당 row를 사용할지 말지
+-- 아니면 user_id에 따른 새로운 row를 생성할지 결정하는 단계가 없음. -> 아쉬운점. 
 
 DELIMITER $$
 
@@ -95,6 +98,18 @@ BEGIN
     FROM detailed_reservation dr
     JOIN reservation res ON dr.reservation_id = res.id
     WHERE res.user_id = p_user_id;
+
+        -- 결제 내역 출력
+	SELECT 
+    pdr.payment_id,
+    pdr.detailed_reservation_id,
+    p.created_time
+	FROM payment_detailed_reservation pdr
+	JOIN payment p ON pdr.payment_id = p.id
+	JOIN detailed_reservation dr ON pdr.detailed_reservation_id = dr.id
+	JOIN reservation res ON dr.reservation_id = res.id
+	WHERE res.user_id = p_user_id
+	ORDER BY p.created_time DESC;
 END$$
 
 DELIMITER ;
@@ -140,6 +155,18 @@ BEGIN
     FROM detailed_reservation dr
     JOIN reservation res ON dr.reservation_id = res.id
     WHERE res.user_id = p_user_id;
+
+        -- 결제 내역 출력
+	SELECT 
+    pdr.payment_id,
+    pdr.detailed_reservation_id,
+    p.created_time
+	FROM payment_detailed_reservation pdr
+	JOIN payment p ON pdr.payment_id = p.id
+	JOIN detailed_reservation dr ON pdr.detailed_reservation_id = dr.id
+	JOIN reservation res ON dr.reservation_id = res.id
+	WHERE res.user_id = p_user_id
+	ORDER BY p.created_time DESC;
 END$$
 
 DELIMITER ;
@@ -185,6 +212,18 @@ BEGIN
     FROM detailed_reservation dr
     JOIN reservation res ON dr.reservation_id = res.id
     WHERE res.user_id = p_user_id;
+
+        -- 결제 내역 출력
+	SELECT 
+    pdr.payment_id,
+    pdr.detailed_reservation_id,
+    p.created_time
+	FROM payment_detailed_reservation pdr
+	JOIN payment p ON pdr.payment_id = p.id
+	JOIN detailed_reservation dr ON pdr.detailed_reservation_id = dr.id
+	JOIN reservation res ON dr.reservation_id = res.id
+	WHERE res.user_id = p_user_id
+	ORDER BY p.created_time DESC;
 END$$
 
 DELIMITER ;
@@ -200,3 +239,37 @@ CALL 결제_성수기(8,'신용카드');
 CALL 결제_비성수기(9, '신용카드');
 CALL 결제_성수기(10,'현금');
 
+
+-- 결제 정보 조회
+DELIMITER $$
+
+CREATE PROCEDURE 조회_결제_예약_정보(
+    IN p_user_id BIGINT -- 조회할 사용자 ID
+)
+BEGIN
+    -- 특정 사용자의 결제 정보와 관련된 예약 상세 정보 조회
+    SELECT 
+        p.id AS payment_id,
+        p.total_price,
+        p.payment_type,
+        p.created_time AS payment_time,
+        -- dr.id AS detailed_reservation_id,
+        -- dr.reservation_id,
+        dr.room_id AS room_id,
+        dr.coupon_id,
+        dr.check_in_day,
+        dr.check_out_day,
+        dr.num_people
+    FROM 
+        payment p
+    JOIN 
+        reservation res ON p.reservation_id = res.id
+    JOIN 
+        detailed_reservation dr ON dr.reservation_id = res.id
+    WHERE 
+        res.user_id = p_user_id;
+END$$
+
+DELIMITER ;
+
+CALL 결제_정보_조회(2);

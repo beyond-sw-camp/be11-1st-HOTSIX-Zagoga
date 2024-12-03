@@ -130,6 +130,7 @@ INSERT INTO room_facility (room_id, bed_num, bed_type, has_bath, has_air_conditi
 insert into reservation(user_id) 
 values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
 
+-- 이 밑에서부터는 프로시져 넣고 프로시져로 등록
 -- detailed_reservation insert
 INSERT INTO detailed_reservation(reservation_id, room_id, coupon_id, 
 check_in_day, check_out_day, num_people) VALUES

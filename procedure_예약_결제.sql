@@ -56,7 +56,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE PROCEDURE (
+CREATE PROCEDURE 결제_비성수기(
     IN p_user_id BIGINT,          -- 사용자 ID
     IN p_payment_type VARCHAR(255) -- 결제 유형 (예: '신용카드', '현금')
 )
@@ -99,14 +99,104 @@ END$$
 
 DELIMITER ;
 
-CALL 결제_단체(1, '신용카드');
-CALL 결제_단체(2,'현금');
-CALL 결제_단체(3,'신용카드');
-CALL 결제_단체(4,'신용카드');
-CALL 결제_단체(5, '현금');
-CALL 결제_단체(6,'신용카드');
-CALL 결제_단체(7, '현금');
-CALL 결제_단체(8,'신용카드');
-CALL 결제_단체(9, '신용카드');
-CALL 결제_단체(10,'현금');
+DELIMITER $$
+
+CREATE PROCEDURE 결제_성수기(
+    IN p_user_id BIGINT,          -- 사용자 ID
+    IN p_payment_type VARCHAR(255) -- 결제 유형 (예: '신용카드', '현금')
+)
+BEGIN
+    DECLARE total_price INT DEFAULT 0;  -- 총 금액 저장 변수
+    DECLARE new_payment_id BIGINT;      -- 새로 생성된 payment ID 저장 변수
+    DECLARE representative_reservation_id BIGINT; -- 대표 reservation_id 저장 변수
+
+    -- 해당 user_id의 모든 예약에 대한 성수기 가격 총합 계산
+    SELECT SUM(r.peak_season_price) INTO total_price
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    JOIN room r ON dr.room_id = r.id
+    WHERE res.user_id = p_user_id;
+
+    -- 대표 reservation_id를 가져옴 (첫 번째 reservation_id 사용)
+    SELECT res.id INTO representative_reservation_id
+    FROM reservation res
+    WHERE res.user_id = p_user_id
+    LIMIT 1;
+
+    -- payment 테이블에 결제 정보 삽입
+    INSERT INTO payment (reservation_id, total_price, payment_type)
+    VALUES (
+        representative_reservation_id,  -- 대표 reservation_id를 설정
+        total_price,    -- 계산된 총 금액
+        p_payment_type  -- 전달받은 결제 유형
+    );
+
+    -- 방금 생성된 payment ID 가져오기
+    SET new_payment_id = LAST_INSERT_ID();
+
+    -- payment_detailed_reservation 테이블에 관련 detailed_reservation ID 추가
+    INSERT INTO payment_detailed_reservation (payment_id, detailed_reservation_id)
+    SELECT new_payment_id, dr.id
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    WHERE res.user_id = p_user_id;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE 결제_대실(
+    IN p_user_id BIGINT,          -- 사용자 ID
+    IN p_payment_type VARCHAR(255) -- 결제 유형 (예: '신용카드', '현금')
+)
+BEGIN
+    DECLARE total_price INT DEFAULT 0;  -- 총 금액 저장 변수
+    DECLARE new_payment_id BIGINT;      -- 새로 생성된 payment ID 저장 변수
+    DECLARE representative_reservation_id BIGINT; -- 대표 reservation_id 저장 변수
+
+    -- 해당 user_id의 모든 예약에 대한 비성수기 가격 총합 계산
+    SELECT SUM(r.rent_price) INTO total_price
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    JOIN room r ON dr.room_id = r.id
+    WHERE res.user_id = p_user_id;
+
+    -- 대표 reservation_id를 가져옴 (첫 번째 reservation_id 사용)
+    SELECT res.id INTO representative_reservation_id
+    FROM reservation res
+    WHERE res.user_id = p_user_id
+    LIMIT 1;
+
+    -- payment 테이블에 결제 정보 삽입
+    INSERT INTO payment (reservation_id, total_price, payment_type)
+    VALUES (
+        representative_reservation_id,  -- 대표 reservation_id를 설정
+        total_price,    -- 계산된 총 금액
+        p_payment_type  -- 전달받은 결제 유형
+    );
+
+    -- 방금 생성된 payment ID 가져오기
+    SET new_payment_id = LAST_INSERT_ID();
+
+    -- payment_detailed_reservation 테이블에 관련 detailed_reservation ID 추가
+    INSERT INTO payment_detailed_reservation (payment_id, detailed_reservation_id)
+    SELECT new_payment_id, dr.id
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    WHERE res.user_id = p_user_id;
+END$$
+
+DELIMITER ;
+
+CALL 결제_비성수기(1, '신용카드');
+CALL 결제_성수기(2,'현금');
+CALL 결제_대실(3,'신용카드');
+CALL 결제_성수기(4,'신용카드');
+CALL 결제_대실(5, '현금');
+CALL 결제_비성수기(6,'신용카드');
+CALL 결제_비성수기(7, '현금');
+CALL 결제_성수기(8,'신용카드');
+CALL 결제_비성수기(9, '신용카드');
+CALL 결제_성수기(10,'현금');
 

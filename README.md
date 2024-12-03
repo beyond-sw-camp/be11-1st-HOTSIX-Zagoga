@@ -617,6 +617,25 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>34. 업주 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
+```sql
+DELIMITER $$
+CREATE PROCEDURE insert_owners()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 10000 DO
+        INSERT INTO owner (name, personal_id, phone_number, account_number, created_time, delete_owner) VALUES
+        (CONCAT('업주', i), 
+         CONCAT('P', LPAD(i, 6, '0')), 
+         CONCAT('010-', FLOOR(RAND() * 1000), '-', FLOOR(RAND() * 10000)), 
+         CONCAT('123-456-78901', i), 
+         NOW(), 
+         0);
+        SET i = i + 1;
+    END WHILE;
+END$$
+DELIMITER ;
+```
+
 ![스크린샷 2024-12-03 112749](https://github.com/user-attachments/assets/d8fe4fc7-6989-4d06-bdfa-f521f0eabcc3)
 
 
@@ -626,6 +645,31 @@ CREATE TABLE payment_detailed_reservation (
 <details>
 <summary><b>35. 숙소 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
+
+```sql
+DELIMITER $$
+CREATE PROCEDURE insert_accommodations()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 10000 DO
+        INSERT INTO accommodation (owner_id, name, type, address, latitue, hardness, check_in_time, check_out_time, rent_time, business_num, update_time, delete_accommodation) VALUES
+        (FLOOR(1 + RAND() * 3), 
+         CONCAT('숙소 ', i), 
+         ELT(FLOOR(1 + RAND() * 3), 'hotel', 'motel', 'pension'), 
+         CONCAT('주소 ', i), 
+         ROUND(33 + (RAND() * 5), 6), 
+         ROUND(126 + (RAND() * 5), 6), 
+         '15:00', 
+         '11:00', 
+         '4시간', 
+         CONCAT(FLOOR(100 + RAND() * 900), '-', FLOOR(100 + RAND() * 900), '-', FLOOR(1000 + RAND() * 9000)), 
+         NOW(), 
+         0);
+        SET i = i + 1;
+    END WHILE;
+END$$
+DELIMITER ;
+```
 
 ![스크린샷 2024-12-03 112636](https://github.com/user-attachments/assets/e18731b9-c4d2-41a6-b822-2d8e93cee235)
 

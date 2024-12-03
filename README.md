@@ -237,7 +237,7 @@ CREATE TABLE detailed_reservation (
 	id bigint PRIMARY KEY NOT NULL auto_increment,
 	reservation_id bigint NOT NULL,
 	room_id bigint NOT NULL,
-	coupon_id bigint NOT NULL,
+	coupon_id bigint NULL,
 	check_in_day date NOT NULL,
 	check_out_day date NOT NULL,
 	num_people int NOT NULL,
@@ -572,62 +572,256 @@ CREATE TABLE payment_detailed_reservation (
 <summary><b>25. 선택한 객실 예약을 위한 정보 입력 </b></summary>
 <div markdown="1">
 
+장바구니에 담은 객실들을 한 번에 결제가 가능하게끔 설계하기 위해,
+예약_객실 프로시저와 결제 프로시저를 나누었다.
+
 <img width="368" alt="예약_객실_프로시저_1" src="https://github.com/user-attachments/assets/f6dee1c7-37d9-4b4d-aaae-111b8872cadb">
 
 
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE 예약_객실(
+    IN p_reservation_id BIGINT,
+    IN p_room_id BIGINT,
+    IN p_coupon_id BIGINT,
+    IN p_check_in_day DATE,
+    IN p_check_out_day DATE,
+    IN p_num_people INT
+)
+BEGIN
+    -- `detailed_reservation`에 데이터 삽입
+    INSERT INTO detailed_reservation (
+        reservation_id, 
+        room_id, 
+        coupon_id, 
+        check_in_day, 
+        check_out_day, 
+        num_people
+    )
+    VALUES (
+        p_reservation_id, 
+        p_room_id, 
+        p_coupon_id, 
+        p_check_in_day, 
+        p_check_out_day, 
+        p_num_people
+    );
+END$$
+
+DELIMITER ;
+```
 
 
 </div>
 </details>
 
 <details>
-<summary><b>26. 여러개 객실 예약 한번에 결제 가능-비성수기 가격</b></summary>
+<summary><b>26. 가격에 따른 다른 결제 프로시저</b></summary>
+<div markdown="1">
+
+결제 금액을 비성수기/성수기/대실 을 나누어 설정해뒀다.
+때에 맞는 결제 프로시저를 이용한다.
+밑의 사진은 성수기 시즌 가격으로 결제를 진행할 때이다.
+
+<img width="360" alt="결제_성수기_1" src="https://github.com/user-attachments/assets/a2146766-57d7-45ca-8bff-097bd7536564">
+
+
+</div>
+</details>
+
+<details>
+<summary><b>27. 여러개 객실 예약 한번에 결제 가능-비성수기 가격</b></summary>
+<div markdown="1">
+
+미리 user_id가 8인 사람에게 숙박 장바구니를 넣어두었다.
+결제를 진행한 후, created_time 최신순에 따라 결제 내역을 출력하도록 프로시저를 구성했다.
+
+<img width="592" alt="결제_단체_예시" src="https://github.com/user-attachments/assets/44cbd022-c454-4071-b970-739a557112fe">
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE 결제_비성수기(
+    IN p_user_id BIGINT,          -- 사용자 ID
+    IN p_payment_type VARCHAR(255) -- 결제 유형 (예: '신용카드', '현금')
+)
+BEGIN
+    DECLARE total_price INT DEFAULT 0;  -- 총 금액 저장 변수
+    DECLARE new_payment_id BIGINT;      -- 새로 생성된 payment ID 저장 변수
+    DECLARE representative_reservation_id BIGINT; -- 대표 reservation_id 저장 변수
+
+    -- 해당 user_id의 모든 예약에 대한 비성수기 가격 총합 계산
+    SELECT SUM(r.off_peak_season_price) INTO total_price
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    JOIN room r ON dr.room_id = r.id
+    WHERE res.user_id = p_user_id;
+
+    -- 대표 reservation_id를 가져옴 (첫 번째 reservation_id 사용)
+    SELECT res.id INTO representative_reservation_id
+    FROM reservation res
+    WHERE res.user_id = p_user_id
+    LIMIT 1;
+
+    -- payment 테이블에 결제 정보 삽입
+    INSERT INTO payment (reservation_id, total_price, payment_type)
+    VALUES (
+        representative_reservation_id,  -- 대표 reservation_id를 설정
+        total_price,    -- 계산된 총 금액
+        p_payment_type  -- 전달받은 결제 유형
+    );
+
+    -- 방금 생성된 payment ID 가져오기
+    SET new_payment_id = LAST_INSERT_ID();
+
+    -- payment_detailed_reservation 테이블에 관련 detailed_reservation ID 추가
+    INSERT INTO payment_detailed_reservation (payment_id, detailed_reservation_id)
+    SELECT new_payment_id, dr.id
+    FROM detailed_reservation dr
+    JOIN reservation res ON dr.reservation_id = res.id
+    WHERE res.user_id = p_user_id;
+
+   -- 결제 내역 출력
+   SELECT 
+   pdr.payment_id, pdr.detailed_reservation_id, p.created_time
+   FROM payment_detailed_reservation pdr
+   JOIN payment p ON pdr.payment_id = p.id
+   JOIN detailed_reservation dr ON pdr.detailed_reservation_id = dr.id
+   JOIN reservation res ON dr.reservation_id = res.id
+   WHERE res.user_id = p_user_id
+   ORDER BY p.created_time DESC;
+END$$
+
+DELIMITER ;
+```
+
+
+</div>
+</details>
+
+<details>
+<summary><b>28.예약 정보 조회</b></summary>
+<div markdown="1">
+
+user_id로 자신이 예약한 정보를 조회하는 프로시저이다.
+
+<img width="368" alt="결제_정보_조회_프로시저_1" src="https://github.com/user-attachments/assets/6762cf22-16d3-4e8c-975e-f86d417cdeec">
+
+아래 이미지는 user_id를 8로 검색했을 때, 나오는 결과이다.
+사실, payment_time 최신순 정렬을 까먹었다.
+
+<img width="956" alt="결제_정보_조회_프로시저_1_결과" src="https://github.com/user-attachments/assets/a8c443cc-7724-47f2-859e-dab40fbb6e21">
+
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE 조회_결제_예약_정보(
+    IN p_user_id BIGINT -- 조회할 사용자 ID
+)
+BEGIN
+    -- 특정 사용자의 결제 정보와 관련된 예약 상세 정보 조회
+    SELECT 
+        p.id AS payment_id,
+        p.total_price,
+        p.payment_type,
+        p.created_time AS payment_time,
+        dr.room_id AS room_id,
+        dr.coupon_id,
+        dr.check_in_day,
+        dr.check_out_day,
+        dr.num_people
+    FROM 
+        payment p
+    JOIN 
+        reservation res ON p.reservation_id = res.id
+    JOIN 
+        detailed_reservation dr ON dr.reservation_id = res.id
+    WHERE 
+        res.user_id = p_user_id;
+END$$
+
+DELIMITER ;
+```
+
+
+</div>
+</details>
+
+<details>
+<summary><b>29. 채팅 메세지 db 저장</b></summary>
 <div markdown="1">
 
 
+채팅 프로시저에서는 유저-상담원, 오너-상담원, 유저-오너를
+input id 값으로 구분하고, sender을 통해 메세지의 수신자를 판단한다.
+cs_chat table 에서 user_id, owner_id, admin_id를 모두 fk, null 로 받는다.
+아래는 유저-상담원 채팅 프로시저 sql문이다.
+
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE 채팅_유저_상담원 (
+	IN p_user_id BIGINT,
+	IN p_admin_id BIGINT,
+	IN p_contents VARCHAR(3000),
+	IN p_sender ENUM('user', 'admin')
+)
+BEGIN
+	INSERT INTO cs_chat (user_id, admin_id, contents, sender)
+	VALUES (p_user_id, p_admin_id, p_contents, p_sender);
+END$$
+
+DELIMITER ;
+```
+
+아래 사진은 오너-상담원 채팅 프로시저를 사용한 모습이다.
+
+<img width="379" alt="채팅 프로시져" src="https://github.com/user-attachments/assets/e2edb7b5-116e-41d2-9577-ea004b2a1171">
+
+
+
 
 </div>
 </details>
 
 <details>
-<summary><b>27. 여러개 객실 예약 한번에 결제 가능-성수기 가격</b></summary>
+<summary><b>30. 내가 보낸 채팅 메세지 조회</b></summary>
 <div markdown="1">
 
+내가 쓴 채팅을 조회하기 위해, sender를 검색한다.
+sender는 user, owner, admin 모두가 될 수 있기 때문에,
+자신의 역할군을 밝히고 해당 id 값을 입력받아 채팅 내역을 모두 조회한다.
 
 
-</div>
-</details>
+```sql
+DELIMITER $$
 
-<details>
-<summary><b>28. 여러개 객실 예약 한번에 결제 가능-대실 가격</b></summary>
-<div markdown="1">
+CREATE PROCEDURE 채팅_내역_조회 (
+	IN p_sender ENUM('user', 'owner', 'admin'), 
+	IN p_sender_id BIGINT
+)
+BEGIN
+	IF p_sender = 'user' THEN
+		SELECT * FROM cs_chat
+		WHERE user_id = p_sender_id AND sender = 'user';
+	ELSEIF p_sender = 'owner' THEN
+		SELECT * FROM cs_chat
+		WHERE owner_id = p_sender_id AND sender = 'owner';
+	ELSEIF p_sender = 'admin' THEN
+		SELECT * FROM cs_chat
+		WHERE admin_id = p_sender_id AND sender = 'admin';
+	END IF;
+END$$
 
-
-
-</div>
-</details>
-
-<details>
-<summary><b>29.예약 정보 조회</b></summary>
-<div markdown="1">
-
-
-
-</div>
-</details>
-
-<details>
-<summary><b>30.채팅 메세지 db 저장(유저-오너)</b></summary>
-<div markdown="1">
+DELIMITER ;
+```
 
 
+<img width="629" alt="채팅_내역_조회" src="https://github.com/user-attachments/assets/5000e290-27d7-4eee-ac82-671289400bcd">
 
-</div>
-</details>
-
-<details>
-<summary><b>31. 채팅 메세지 db 저장(유저-상담원)</b></summary>
-<div markdown="1">
 
 
 
@@ -635,25 +829,7 @@ CREATE TABLE payment_detailed_reservation (
 </details>
 
 <details>
-<summary><b>32. 채팅 메세지 db 저장(오너-상담원)</b></summary>
-<div markdown="1">
-
-
-
-</div>
-</details>
-
-<details>
-<summary><b>33. 내가 보낸 채팅 메세지 조회</b></summary>
-<div markdown="1">
-
-
-
-</div>
-</details>
-
-<details>
-<summary><b>34. 업주 생성- 프로시저 (10,000개)</b></summary>
+<summary><b>31. 업주 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
 ```sql
@@ -682,7 +858,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary><b>35. 숙소 생성- 프로시저 (10,000개)</b></summary>
+<summary><b>32. 숙소 생성- 프로시저 (10,000개)</b></summary>
 <div markdown="1">
 
 ```sql

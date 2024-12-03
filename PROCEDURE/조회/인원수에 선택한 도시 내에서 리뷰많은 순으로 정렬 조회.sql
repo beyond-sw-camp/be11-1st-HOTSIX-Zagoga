@@ -2,9 +2,9 @@
 
 DELIMITER //
 
-CREATE PROCEDURE 인원수에 선택한 도시 내에서 리뷰많은 순으로 정렬 조회(
-    IN max_capacity INT,
-    IN address_keyword VARCHAR(255)
+CREATE PROCEDURE 인원수_도시선택_리뷰개수순_정렬조회(
+    IN 인원수 INT,
+    IN 도시명 VARCHAR(255)
 )
 BEGIN
     SELECT 
@@ -22,8 +22,8 @@ BEGIN
     GROUP BY 
         a.id, a.name, a.address
     HAVING 
-        MAX(r.people_max) >= max_capacity
-        AND a.address LIKE CONCAT('%', address_keyword, '%')
+        MAX(r.people_max) >= 인원수
+        AND a.address LIKE CONCAT('%', 도시명, '%')
     ORDER BY 
         review_count DESC;
 END //

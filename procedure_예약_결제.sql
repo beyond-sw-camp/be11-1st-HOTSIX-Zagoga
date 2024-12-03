@@ -32,6 +32,8 @@ BEGIN
     );
 END$$
 
+DELIMITER ;
+
 CALL 예약_객실(1, 1, 1, '2024-12-04', '2024-12-05', 2);
 CALL 예약_객실(2, 2, 2, '2024-12-05', '2024-12-07', 3);
 CALL 예약_객실(3, 3, 3, '2024-12-06', '2024-12-09', 5);
@@ -54,7 +56,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE PROCEDURE 결제_단체(
+CREATE PROCEDURE (
     IN p_user_id BIGINT,          -- 사용자 ID
     IN p_payment_type VARCHAR(255) -- 결제 유형 (예: '신용카드', '현금')
 )
